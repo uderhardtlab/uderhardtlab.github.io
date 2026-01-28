@@ -429,7 +429,8 @@
             overflow: hidden;
         }
 
-        .research-image img {
+        .research-image img,
+        .research-image video {
             width: 100%;
             height: auto;
             display: block;
@@ -838,6 +839,159 @@
 
         .pub-item h4 a:hover {
             color: var(--node);
+        }
+
+        .pub-item-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .pub-item-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .pub-item-link:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: var(--filament);
+            color: var(--node);
+        }
+
+        .pub-item-link svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .pub-details-btn {
+            background: rgba(168, 85, 247, 0.15);
+            border-color: var(--filament);
+            cursor: pointer;
+        }
+
+        .pub-details-btn:hover {
+            background: var(--filament);
+            color: var(--void);
+        }
+
+        /* Publication Modal */
+        .pub-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(3, 1, 8, 0.95);
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .pub-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .pub-modal-content {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            background: var(--deep);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+        }
+
+        .pub-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(168, 85, 247, 0.2);
+            color: var(--text);
+            font-size: 1.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pub-modal-close:hover {
+            background: var(--filament);
+            color: var(--void);
+        }
+
+        .pub-modal-header {
+            margin-bottom: 1.5rem;
+            padding-right: 3rem;
+        }
+
+        .pub-modal-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .pub-modal-header .authors {
+            color: var(--text-dim);
+            margin-bottom: 0.25rem;
+        }
+
+        .pub-modal-header .journal {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .pub-graphical-abstract {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .pub-graphical-abstract.visible {
+            display: block;
+        }
+
+        .pub-description {
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .pub-media-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pub-media-gallery img,
+        .pub-media-gallery video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .pub-modal-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
         }
 
         .funding-card.has-link {
@@ -1451,7 +1605,7 @@
         <div class="container">
             <div class="research-grid">
                 <div class="research-image reveal">
-                    <img src="images/research.jpg" alt="Research">
+                    <video src="images/research.m4v" autoplay loop muted playsinline></video>
                 </div>
                 <div class="research-content reveal delay-1">
                     <h2 class="section-title" id="researchTitle"></h2>
@@ -1491,10 +1645,27 @@
                 <h2 class="section-title">Publications</h2>
                 <p class="section-subtitle">Our contributions to the field</p>
             </div>
-            <div class="featured-pub reveal" id="featuredPub"></div>
             <div class="pub-timeline reveal" id="pubTimeline"></div>
         </div>
     </section>
+
+    <!-- Publication Detail Modal -->
+    <div class="pub-modal" id="pubModal">
+        <div class="pub-modal-content">
+            <button class="pub-modal-close" onclick="closePublicationModal()">&times;</button>
+            <div class="pub-modal-header">
+                <h3 id="pubModalTitle"></h3>
+                <p class="authors" id="pubModalAuthors"></p>
+                <p class="journal" id="pubModalJournal"></p>
+            </div>
+            <div class="pub-modal-body">
+                <img id="pubModalAbstract" class="pub-graphical-abstract" src="" alt="Graphical Abstract">
+                <div id="pubModalDescription" class="pub-description"></div>
+                <div id="pubModalMedia" class="pub-media-gallery"></div>
+            </div>
+            <div class="pub-modal-links" id="pubModalLinks"></div>
+        </div>
+    </div>
 
     <!-- Stats Section -->
     <section class="section section-deep" id="stats">
@@ -1586,21 +1757,21 @@
         // ========================================
         images: {
             hero: "images/hero.png",
-            research: "images/research.png"
+            research: "images/research.m4v"
         },
 
         // ========================================
         // ELECTRIC PULSE ANIMATION
         // ========================================
         pulses: {
-            count: 2,          // Number of active pulses (1-30)
-            speed: 0.8,         // Movement speed (0.5-5)
+            count: 3,          // Number of active pulses (1-30)
+            speed: 1.5,         // Movement speed (0.5-5)
             size: 3.9999999999999996,          // Pulse thickness multiplier (0.5-10)
-            length: 3034,        // Trail length in points (4-5000)
+            length: 4114,        // Trail length in points (4-5000)
             sparkle: 2,         // Sparkle intensity (1-10)
             hue: 268,            // Color hue (0-360)
             saturation: 10,    // Color saturation (0-100%)
-            lifetime: 120,       // Comet lifetime in seconds (5-300)
+            lifetime: 185,       // Comet lifetime in seconds (5-300)
             sparkleFade: 0.001  // Sparkle fade rate
         },
 
@@ -1608,13 +1779,6 @@
         // NEWS SECTION
         // ========================================
         news: [
-            {
-                date: "January 2025",
-                tag: "Publication",
-                title: "New paper published in Nature Methods",
-                excerpt: "Our latest work on 3D cell segmentation is now available online.",
-                url: ""
-            },
             {
                 date: "December 2024",
                 tag: "Award",
@@ -1684,10 +1848,8 @@
         // Add new funders by adding objects to this array
         // ========================================
         funders: [
-            { name: "ERC", program: "Starting Grant", icon: "🇪🇺" },
-            { name: "DFG", program: "Emmy Noether", icon: "🇩🇪" },
-            { name: "EMBO", program: "Young Investigator", icon: "🔬" },
-            { name: "University", program: "Core Funding", icon: "🏛️" }
+            { name: "ERC", program: "Starting Grant", icon: "🇪🇺", url: "" },
+            { name: "University", program: "Core Funding", icon: "🏛️", url: "" }
         ],
 
         // ========================================
@@ -1701,50 +1863,34 @@
         },
 
         // ========================================
-        // FEATURED PUBLICATION
-        // The main highlighted publication
-        // ========================================
-        featuredPublication: {
-            title: "MORPHISTO: A Deep Learning Framework for Comprehensive 3D Cell Morphology Analysis in Tissue Microenvironments",
-            authors: "Uderhardt S, Mueller K, Schmidt A, Weber T",
-            journal: "Nature Methods, 2025",
-            links: [
-                { label: "Paper", url: "javascript:void(0)" },
-                { label: "Code", url: "javascript:void(0)" },
-                { label: "Data", url: "javascript:void(0)" }
-            ]
-        },
-
-        // ========================================
         // PUBLICATIONS BY YEAR
-        // Add new years and papers as needed
-        // "Uderhardt S" is automatically highlighted
+        // Each publication can have: publisherUrl, depositUrl, codeUrl
+        // Plus popup details: graphicalAbstract, description, media
         // ========================================
         publications: {
             2025: [
                 {
-                    title: "Automated 3D Nuclei Tracking Across IBEX Imaging Rounds Using Network Flow Optimization",
-                    authors: "Uderhardt S, Chen L, Park J",
-                    journal: "Cell Systems"
-                }
-            ],
-            2024: [
-                {
-                    title: "Cellpose-SAM: Combining Foundation Models for Robust 3D Cell Segmentation",
-                    authors: "Zhang Y, Uderhardt S, Williams R",
-                    journal: "Bioinformatics"
-                },
-                {
-                    title: "Handling Anisotropic Microscopy Data: A Practical Guide for Deep Learning Segmentation",
-                    authors: "Uderhardt S, Thompson M",
-                    journal: "Nature Protocols"
-                }
-            ],
-            2023: [
-                {
-                    title: "Spatial Transcriptomics Meets Morphology: Linking Gene Expression to Cellular Architecture",
-                    authors: "Kumar A, Uderhardt S, Lee S, Brown D",
-                    journal: "Genome Biology"
+                    title: "Matrix-producing neutrophils populate and shield the skin.",
+                    authors: "Vicanolo T, Özcan A, Li JL, Huerta-López C, Ballesteros I, Rubio-Ponce A, Dumitru AC, Nicolás-Ávila JÁ, Molina-Moreno M, Reyes-Gutierrez P, Johnston AD, Martone C, Greto E, Quílez-Alvarez A, Calvo E, Bonzon-Kulichenko E, Álvarez-Velez R, Chooi MY, Kwok I, González-Bermúdez B, Malleret B, Espinosa FM, Zhang M, Wang YL, Sun D, Zhen Chong S, El-Armouche A, Kim KK, Udalova IA, Greco V, Garcia R, Vázquez J, Dopazo A, Plaza GR, Alegre-Cebollada J, Uderhardt S, Ng LG, Hidalgo A",
+                    journal: "Nature, 2025",
+                    publisherUrl: "https://doi.org/10.1038/s41586-025-08741-5",
+                    depositUrl: "https://paperpile.com/shared/smOcy5Ek3RyygqrS887rq7Q",
+                    codeUrl: "",
+                    graphicalAbstract: "vicanolo.png",
+                    description: "In this collaborative study, together with the labs of Andres Hidalgo and Lai Guan Ng, we uncovered an unexpected structural role for neutrophils in the skin: they do not just arrive to kill microbes, they literally help build and reinforce the barrier itself.
+
+What we found…
+
+We surveyed immune diversity across multiple tissues and picked up a distinct neutrophil population in the skin that is unusually rich in extracellular matrix (ECM)–related proteins and enzymes. In steady-state skin, these matrix-producing neutrophils are already embedded in the tissue where they contribute to ECM composition, stiffen the matrix, and, as a result, strengthen barrier function before any overt inflammation. When we injured the skin, these neutrophils switched into an architectural program: they assembled ECM “rings” encircling the wound, physically walling off the damaged area from foreign molecules and bacteria.
+
+Mechanism: TGFβ-dependent “shielding” program
+
+We traced this structural behavior to TGFβ signaling in neutrophils: when we disabled the TGFβ receptor specifically in these cells, the matrix rings failed to form properly around wounds. Loss of this neutrophil TGFβ pathway did not just change morphology; it made the wounds more permissive to bacterial invasion, directly linking the structural program to antimicrobial protection. Conceptually, this places neutrophils as dual-function cells in the skin: rapid toxic killers, but also on-site matrix engineers that create a physical, ECM-based shield against the outside world.
+
+Why this matters clinically…
+
+Clinically, this suggests that defects in neutrophil–ECM programs or TGFβ responsiveness could contribute to fragile skin barriers, recurrent infections, or impaired wound healing, even when neutrophil counts appear “normal.” It points to a therapeutic angle where, instead of only boosting antimicrobial killing, we might try to enhance or restore this structural shielding program—for example, by modulating TGFβ pathways in neutrophils or by mimicking their matrix output in chronic wounds. More broadly, it reframes how we think about innate immunity in barrier organs: some leukocytes may be best understood and eventually targeted as tissue builders that physically armor the host, not merely as transient inflammatory visitors.",
+                    media: []
                 }
             ]
         },
@@ -2146,44 +2292,137 @@
     }
 
     // Render Publications Section
-    function renderPublications() {
-        // Featured Publication
-        const featuredPub = document.getElementById('featuredPub');
-        const fp = CONFIG.featuredPublication;
-        featuredPub.innerHTML = `
-            <span class="featured-badge">Featured</span>
-            <h3>${fp.title}</h3>
-            <p class="authors">${highlightAuthor(fp.authors)}</p>
-            <p class="journal">${fp.journal}</p>
-            <div class="pub-links">
-                ${fp.links.map(link => `<a href="${link.url}" class="pub-link">${link.label}</a>`).join('')}
-            </div>
-        `;
+    // Store publications for modal access
+    let allPublications = [];
 
-        // Timeline
+    function renderPublications() {
         const pubTimeline = document.getElementById('pubTimeline');
         const years = Object.keys(CONFIG.publications).sort((a, b) => b - a);
+
+        // Flatten publications for modal access
+        allPublications = [];
+        let pubIndex = 0;
 
         pubTimeline.innerHTML = years.map(year => `
             <div class="pub-year">
                 <div class="pub-year-marker"></div>
                 <div class="pub-year-label">${year}</div>
                 ${CONFIG.publications[year].map(pub => {
-                    const hasUrl = pub.url && pub.url.trim();
-                    const titleHtml = hasUrl
-                        ? `<h4><a href="${pub.url}" target="_blank" rel="noopener">${pub.title}</a></h4>`
-                        : `<h4>${pub.title}</h4>`;
+                    const idx = pubIndex++;
+                    allPublications.push(pub);
+
+                    // Build links
+                    let linksHtml = '<div class="pub-item-links">';
+                    if (pub.publisherUrl) {
+                        linksHtml += `<a href="${pub.publisherUrl}" target="_blank" rel="noopener" class="pub-item-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                            Publisher
+                        </a>`;
+                    }
+                    if (pub.depositUrl) {
+                        linksHtml += `<a href="${pub.depositUrl}" target="_blank" rel="noopener" class="pub-item-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
+                            Deposit
+                        </a>`;
+                    }
+                    if (pub.codeUrl) {
+                        linksHtml += `<a href="${pub.codeUrl}" target="_blank" rel="noopener" class="pub-item-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                            Code
+                        </a>`;
+                    }
+                    // Add details button if there's extra content
+                    const hasDetails = pub.graphicalAbstract || pub.description || (pub.media && pub.media.length > 0);
+                    if (hasDetails) {
+                        linksHtml += `<button class="pub-item-link pub-details-btn" onclick="openPublicationModal(${idx})">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                            Details
+                        </button>`;
+                    }
+                    linksHtml += '</div>';
+
+                    const hasAnyLinks = pub.publisherUrl || pub.depositUrl || pub.codeUrl || hasDetails;
+
                     return `
                         <div class="pub-item">
-                            ${titleHtml}
+                            <h4>${pub.title}</h4>
                             <p class="authors">${highlightAuthor(pub.authors)}</p>
                             <p class="journal">${pub.journal}</p>
+                            ${hasAnyLinks ? linksHtml : ''}
                         </div>
                     `;
                 }).join('')}
             </div>
         `).join('');
     }
+
+    // Publication Modal Functions
+    function openPublicationModal(index) {
+        const pub = allPublications[index];
+        if (!pub) return;
+
+        document.getElementById('pubModalTitle').textContent = pub.title;
+        document.getElementById('pubModalAuthors').innerHTML = highlightAuthor(pub.authors);
+        document.getElementById('pubModalJournal').textContent = pub.journal;
+
+        // Graphical abstract
+        const abstractImg = document.getElementById('pubModalAbstract');
+        if (pub.graphicalAbstract) {
+            abstractImg.src = pub.graphicalAbstract;
+            abstractImg.classList.add('visible');
+        } else {
+            abstractImg.classList.remove('visible');
+        }
+
+        // Description
+        document.getElementById('pubModalDescription').innerHTML = pub.description || '';
+
+        // Media gallery
+        const mediaGallery = document.getElementById('pubModalMedia');
+        if (pub.media && pub.media.length > 0) {
+            mediaGallery.innerHTML = pub.media.map(item => {
+                if (item.type === 'video') {
+                    return `<video src="${item.url}" controls></video>`;
+                } else {
+                    return `<img src="${item.url}" alt="${item.caption || ''}">`;
+                }
+            }).join('');
+        } else {
+            mediaGallery.innerHTML = '';
+        }
+
+        // Links
+        let modalLinks = '';
+        if (pub.publisherUrl) {
+            modalLinks += `<a href="${pub.publisherUrl}" target="_blank" rel="noopener" class="pub-link">Publisher</a>`;
+        }
+        if (pub.depositUrl) {
+            modalLinks += `<a href="${pub.depositUrl}" target="_blank" rel="noopener" class="pub-link">Deposit</a>`;
+        }
+        if (pub.codeUrl) {
+            modalLinks += `<a href="${pub.codeUrl}" target="_blank" rel="noopener" class="pub-link">Code</a>`;
+        }
+        document.getElementById('pubModalLinks').innerHTML = modalLinks;
+
+        // Show modal
+        document.getElementById('pubModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePublicationModal() {
+        document.getElementById('pubModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePublicationModal();
+    });
+
+    // Close modal on background click
+    document.getElementById('pubModal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'pubModal') closePublicationModal();
+    });
 
     // Render Footer
     function renderFooter() {
