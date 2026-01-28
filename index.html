@@ -211,7 +211,7 @@
             position: absolute;
             inset: 0;
             z-index: 1;
-            background-image: url('images/hero.jpg');
+            background-image: url('images/hero.png');
             background-size: cover;
             background-position: center;
             filter: saturate(1.1) brightness(0.85);
@@ -1655,7 +1655,6 @@
             <button class="pub-modal-close" onclick="closePublicationModal()">&times;</button>
             <div class="pub-modal-header">
                 <h3 id="pubModalTitle"></h3>
-                <p class="authors" id="pubModalAuthors"></p>
                 <p class="journal" id="pubModalJournal"></p>
             </div>
             <div class="pub-modal-body">
@@ -1876,20 +1875,20 @@
                     publisherUrl: "https://doi.org/10.1038/s41586-025-08741-5",
                     depositUrl: "https://paperpile.com/shared/smOcy5Ek3RyygqrS887rq7Q",
                     codeUrl: "",
-                    graphicalAbstract: "vicanolo.png",
-                    description: "In this collaborative study, together with the labs of Andres Hidalgo and Lai Guan Ng, we uncovered an unexpected structural role for neutrophils in the skin: they do not just arrive to kill microbes, they literally help build and reinforce the barrier itself.
-
-What we found…
-
-We surveyed immune diversity across multiple tissues and picked up a distinct neutrophil population in the skin that is unusually rich in extracellular matrix (ECM)–related proteins and enzymes. In steady-state skin, these matrix-producing neutrophils are already embedded in the tissue where they contribute to ECM composition, stiffen the matrix, and, as a result, strengthen barrier function before any overt inflammation. When we injured the skin, these neutrophils switched into an architectural program: they assembled ECM “rings” encircling the wound, physically walling off the damaged area from foreign molecules and bacteria.
-
-Mechanism: TGFβ-dependent “shielding” program
-
-We traced this structural behavior to TGFβ signaling in neutrophils: when we disabled the TGFβ receptor specifically in these cells, the matrix rings failed to form properly around wounds. Loss of this neutrophil TGFβ pathway did not just change morphology; it made the wounds more permissive to bacterial invasion, directly linking the structural program to antimicrobial protection. Conceptually, this places neutrophils as dual-function cells in the skin: rapid toxic killers, but also on-site matrix engineers that create a physical, ECM-based shield against the outside world.
-
-Why this matters clinically…
-
-Clinically, this suggests that defects in neutrophil–ECM programs or TGFβ responsiveness could contribute to fragile skin barriers, recurrent infections, or impaired wound healing, even when neutrophil counts appear “normal.” It points to a therapeutic angle where, instead of only boosting antimicrobial killing, we might try to enhance or restore this structural shielding program—for example, by modulating TGFβ pathways in neutrophils or by mimicking their matrix output in chronic wounds. More broadly, it reframes how we think about innate immunity in barrier organs: some leukocytes may be best understood and eventually targeted as tissue builders that physically armor the host, not merely as transient inflammatory visitors.",
+                    graphicalAbstract: "images/vicanolo.png",
+                    description: `<p>In this collaborative study, together with the labs of Andres Hidalgo and Laiguan Ng, we uncovered an unexpected structural role for neutrophils in the skin: they do not just arrive to kill microbes, they literally help build and reinforce the barrier itself…</p>
+<br>
+<h4>What we found…</h4>
+<br>
+<p>We surveyed immune diversity across multiple tissues and picked up a distinct neutrophil population in the skin that is unusually rich in extracellular matrix (ECM)–related proteins and enzymes. In steady-state skin, these matrix-producing neutrophils are already embedded in the tissue where they contribute to ECM composition, stiffen the matrix, and, as a result, strengthen barrier function before any overt inflammation. When we injured the skin, these neutrophils switched into an architectural program: they assembled ECM “rings” encircling the wound, physically walling off the damaged area from foreign molecules and bacteria.</p>
+<br>
+<h4>Mechanism: TGFβ-dependent “shielding” program</h4>
+<br>
+<p>We traced this structural behavior to TGFβ signaling in neutrophils: when we disabled the TGFβ receptor specifically in these cells, the matrix rings failed to form properly around wounds. Loss of this neutrophil TGFβ pathway did not just change morphology; it made the wounds more permissive to bacterial invasion, directly linking the structural program to antimicrobial protection. Conceptually, this places neutrophils as dual-function cells in the skin: rapid toxic killers, but also on-site matrix engineers that create a physical, ECM-based shield against the outside world.</p>
+<br>
+<h4>Why this matters clinically…</h4>
+<br>
+<p>Clinically, this suggests that defects in neutrophil–ECM programs or TGFβ responsiveness could contribute to fragile skin barriers, recurrent infections, or impaired wound healing, even when neutrophil counts appear “normal.” It points to a therapeutic angle where, instead of only boosting antimicrobial killing, we might try to enhance or restore this structural shielding program—for example, by modulating TGFβ pathways in neutrophils or by mimicking their matrix output in chronic wounds. More broadly, it reframes how we think about innate immunity in barrier organs: some leukocytes may be best understood and eventually targeted as tissue builders that physically armor the host, not merely as transient inflammatory visitors.</p>`,
                     media: []
                 }
             ]
@@ -1899,21 +1898,8 @@ Clinically, this suggests that defects in neutrophil–ECM programs or TGFβ res
         // GALLERY
         // ========================================
         gallery: [
-            {
-                image: "images/gallery1.jpg",
-                caption: "3D Cell Segmentation",
-                description: "Segmented immune cells in tissue microenvironment"
-            },
-            {
-                image: "images/gallery2.jpg",
-                caption: "MORPHISTO Analysis",
-                description: "Morphological feature extraction pipeline"
-            },
-            {
-                image: "images/gallery3.jpg",
-                caption: "Tissue Architecture",
-                description: "Spatial organization of cells in lymph node"
-            }
+            // Add gallery images here when available
+            // { image: "images/gallery1.jpg", caption: "Title", description: "Description" }
         ],
 
         // ========================================
@@ -2362,7 +2348,6 @@ Clinically, this suggests that defects in neutrophil–ECM programs or TGFβ res
         if (!pub) return;
 
         document.getElementById('pubModalTitle').textContent = pub.title;
-        document.getElementById('pubModalAuthors').innerHTML = highlightAuthor(pub.authors);
         document.getElementById('pubModalJournal').textContent = pub.journal;
 
         // Graphical abstract
