@@ -7,7 +7,7 @@
     <meta name="description" content="We develop computational tools to decode the spatial organization of cells and tissues, revealing the hidden geometry of biological systems.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&family=Oswald:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&family=Crimson+Text:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         /* ============================================
            CSS DESIGN SYSTEM
@@ -248,15 +248,18 @@
             z-index: 4;
             pointer-events: none;
             background:
-                linear-gradient(to bottom, #030108 0%, transparent 15%),
-                linear-gradient(to top, #030108 0%, transparent 25%),
-                radial-gradient(ellipse at center, transparent 40%, #030108 100%);
+                linear-gradient(to bottom, #030108 0%, transparent 25%),
+                linear-gradient(to top, #030108 0%, transparent 30%),
+                radial-gradient(ellipse at center, transparent 30%, #030108 90%);
         }
 
         .hero-content {
             position: relative;
             z-index: 10;
             max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .hero-label {
@@ -267,21 +270,37 @@
             letter-spacing: 0.3em;
             color: var(--node);
             margin-bottom: 1.5rem;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.2rem;
+            background: rgba(3, 1, 8, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             border: 1px solid rgba(240, 171, 252, 0.3);
             border-radius: 50px;
         }
 
         .hero-title {
+            display: inline;
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 800;
-            margin-bottom: 1.5rem;
             background: linear-gradient(135deg, var(--text) 0%, var(--node) 50%, var(--plasma) 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: gradientShift 5s ease infinite;
+            padding: 0.2rem 0.8rem;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
+        .hero-title-wrapper {
+            margin-bottom: 1.5rem;
+            background: rgba(3, 1, 8, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            display: inline-block;
+            padding: 0.5rem 0.8rem;
+            border-radius: 12px;
         }
 
         @keyframes gradientShift {
@@ -292,9 +311,14 @@
         .hero-subtitle {
             font-size: clamp(1rem, 2.5vw, 1.25rem);
             color: var(--text-dim);
-            max-width: 700px;
-            margin: 0 auto;
+            max-width: 500px;
             line-height: 1.8;
+            background: rgba(3, 1, 8, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            text-align: center;
         }
 
         .scroll-hint {
@@ -521,9 +545,9 @@
 
         @keyframes organelleFloat {
             0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(2px, -2px); }
-            50% { transform: translate(-1px, 1px); }
-            75% { transform: translate(-2px, -1px); }
+            25% { transform: translate(5px, -4px); }
+            50% { transform: translate(-3px, 5px); }
+            75% { transform: translate(-5px, -3px); }
         }
 
         .team-name {
@@ -1399,7 +1423,9 @@
         <div class="hero-fade"></div>
         <div class="hero-content">
             <span class="hero-label" id="heroLabel"></span>
-            <h1 class="hero-title" id="heroTitle"></h1>
+            <div class="hero-title-wrapper">
+                <h1 class="hero-title" id="heroTitle"></h1>
+            </div>
             <p class="hero-subtitle" id="heroSubtitle"></p>
         </div>
         <div class="scroll-hint">
@@ -1440,8 +1466,8 @@
     <section class="section section-deep" id="team">
         <div class="container">
             <div class="section-header reveal">
-                <h2 class="section-title">Our Team</h2>
-                <p class="section-subtitle">Meet the scientists behind our research</p>
+                <h2 class="section-title">Team</h2>
+                <p class="section-subtitle">current lab members</p>
             </div>
             <div class="team-grid" id="teamGrid"></div>
         </div>
@@ -1536,9 +1562,22 @@
         // HERO SECTION
         // ========================================
         hero: {
-            label: "Computational Biology & Microscopy",
-            title: "test2",
-            subtitle: "We develop computational tools to decode the spatial organization of cells and tissues, revealing the hidden geometry of biological systems."
+            label: "Integrative Tissue Immunology",
+            title: "UDERHARDT LAB",
+            subtitle: "Med III ｜ University Hospital Erlangen ｜ Germany",
+            // Styling
+            labelSize: 1.1,         // rem (0.5-1.5)
+            labelColor: "#a855f7",  // hex color
+            titleSize: 4.0,           // rem (2-8)
+            titleColor1: "#f0abfc", // gradient start
+            titleColor2: "#a855f7", // gradient middle
+            titleColor3: "#e879f9", // gradient end
+            subtitleSize: 0.8,     // rem (0.8-2)
+            subtitleColor: "rgba(245, 243, 255, 0.7)",
+            // Fonts
+            labelFont: "Space Grotesk",
+            titleFont: "Space Grotesk",
+            subtitleFont: "Space Grotesk"
         },
 
         // ========================================
@@ -1548,6 +1587,21 @@
         images: {
             hero: "images/hero.png",
             research: "images/research.png"
+        },
+
+        // ========================================
+        // ELECTRIC PULSE ANIMATION
+        // ========================================
+        pulses: {
+            count: 2,          // Number of active pulses (1-30)
+            speed: 0.8,         // Movement speed (0.5-5)
+            size: 3.9999999999999996,          // Pulse thickness multiplier (0.5-10)
+            length: 3034,        // Trail length in points (4-5000)
+            sparkle: 2,         // Sparkle intensity (1-10)
+            hue: 268,            // Color hue (0-360)
+            saturation: 10,    // Color saturation (0-100%)
+            lifetime: 120,       // Comet lifetime in seconds (5-300)
+            sparkleFade: 0.001  // Sparkle fade rate
         },
 
         // ========================================
@@ -1613,12 +1667,16 @@
         // Each type has a unique cell avatar style
         // ========================================
         team: [
-            { name: "Stefan Uderhardt", role: "Principal Investigator", type: "pi", googleScholar: "", linkedin: "", researchGate: "" },
-            { name: "Christian Maueröder", role: "PostDoc", type: "postdoc", googleScholar: "https://scholar.google.com/citations?user=TQZMIK8AAAAJ&hl=de", linkedin: "https://de.linkedin.com/in/christian-maueroeder", researchGate: "" },
-            { name: "Daniela Weidner", role: "Technician", type: "technician", googleScholar: "", linkedin: "", researchGate: "" },
-            { name: "Eric Greto", role: "PhD Student", type: "phd", googleScholar: "", linkedin: "", researchGate: "" },
-            { name: "Anna Möller", role: "PhD Student", type: "phd", googleScholar: "", linkedin: "", researchGate: "" },
-            { name: "Lizzie 'Lijiang' Li", role: "PhD Student", type: "phd", googleScholar: "", linkedin: "", researchGate: "" }
+            { name: "Stefan Uderhardt", role: "Principal Investigator", type: "pi", googleScholar: "", linkedin: "", researchGate: "", github: "", orcid: "", website: "", websiteLabel: "" },
+            { name: "Christian Maueröder", role: "PostDoc", type: "postdoc", googleScholar: "https://scholar.google.com/citations?user=TQZMIK8AAAAJ&hl=de", linkedin: "https://de.linkedin.com/in/christian-maueroeder", researchGate: "", github: "", orcid: "", website: "", websiteLabel: "" },
+            { name: "Eric Greto", role: "PhD Student", type: "phd", googleScholar: "", linkedin: "https://de.linkedin.com/in/eric-greto-563b08186", researchGate: "", github: "https://github.com/EricGreto", orcid: "", website: "", websiteLabel: "" },
+            { name: "Anna Möller", role: "PhD Student", type: "phd", googleScholar: "https://scholar.google.com/citations?user=JP-4HScAAAAJ&hl=de", linkedin: "", researchGate: "", github: "https://github.com/annmoel", orcid: "", website: "", websiteLabel: "" },
+            { name: "Lijian 'Lizzie' Li", role: "PhD Student", type: "phd", googleScholar: "", linkedin: "", researchGate: "", github: "", orcid: "", website: "https://www.immunomicrotope.de/person/lijian-li/", websiteLabel: "RTG2740" },
+            { name: "Daniela Weidner", role: "Technician", type: "technician", googleScholar: "", linkedin: "", researchGate: "", github: "", orcid: "https://orcid.org/0009-0008-6637-5071", website: "", websiteLabel: "" },
+            { name: "Margarete Schimpf", role: "Technician", type: "technician", googleScholar: "", linkedin: "", researchGate: "", github: "", orcid: "", website: "", websiteLabel: "" },
+            { name: "Oumaima Ben Brahim", role: "PhD Student", type: "phd", googleScholar: "", linkedin: "https://de.linkedin.com/in/oumaima-ben-brahim-247085160", researchGate: "https://www.researchgate.net/profile/Oumaima-Ben-Brahim", github: "", orcid: "", website: "", websiteLabel: "" },
+            { name: "Kara Nachtnebel", role: "PhD Student", type: "phd", googleScholar: "", linkedin: "", researchGate: "", github: "https://github.com/KaraNa182", orcid: "", website: "https://www.trr369-dione.de/team/nachtnebel-alexander/", websiteLabel: "TRR369" },
+            { name: "Jonas Utz", role: "PhD Student", type: "phd", googleScholar: "https://scholar.google.com/citations?user=KC3Y4v8AAAAJ&hl=de", linkedin: "https://de.linkedin.com/in/jonas-utz-8486bb33b", researchGate: "", github: "https://github.com/jonasutz", orcid: "", website: "https://www.aimi.tf.fau.de/person/jonas-utz/", websiteLabel: "AIMI" }
         ],
 
         // ========================================
@@ -1816,9 +1874,39 @@
 
     // Render Hero Section
     function renderHero() {
-        document.getElementById('heroLabel').textContent = CONFIG.hero.label;
-        document.getElementById('heroTitle').textContent = CONFIG.hero.title;
-        document.getElementById('heroSubtitle').textContent = CONFIG.hero.subtitle;
+        const labelEl = document.getElementById('heroLabel');
+        const titleEl = document.getElementById('heroTitle');
+        const subtitleEl = document.getElementById('heroSubtitle');
+
+        labelEl.textContent = CONFIG.hero.label;
+        titleEl.textContent = CONFIG.hero.title;
+        subtitleEl.textContent = CONFIG.hero.subtitle;
+
+        // Apply dynamic styles
+        const h = CONFIG.hero;
+
+        // Label styling
+        if (h.labelSize) labelEl.style.fontSize = `${h.labelSize}rem`;
+        if (h.labelColor) labelEl.style.color = h.labelColor;
+
+        // Title styling (gradient)
+        if (h.titleSize) titleEl.style.fontSize = `clamp(2rem, 8vw, ${h.titleSize}rem)`;
+        if (h.titleColor1 && h.titleColor2 && h.titleColor3) {
+            titleEl.style.background = `linear-gradient(135deg, ${h.titleColor1} 0%, ${h.titleColor2} 50%, ${h.titleColor3} 100%)`;
+            titleEl.style.backgroundSize = '200% 200%';
+            titleEl.style.webkitBackgroundClip = 'text';
+            titleEl.style.webkitTextFillColor = 'transparent';
+            titleEl.style.backgroundClip = 'text';
+        }
+
+        // Subtitle styling
+        if (h.subtitleSize) subtitleEl.style.fontSize = `clamp(0.9rem, 2.5vw, ${h.subtitleSize}rem)`;
+        if (h.subtitleColor) subtitleEl.style.color = h.subtitleColor;
+
+        // Font styling
+        if (h.labelFont) labelEl.style.fontFamily = `'${h.labelFont}', sans-serif`;
+        if (h.titleFont) titleEl.style.fontFamily = `'${h.titleFont}', sans-serif`;
+        if (h.subtitleFont) subtitleEl.style.fontFamily = `'${h.subtitleFont}', sans-serif`;
 
         // Set hero background image from config
         const heroBg = document.querySelector('.hero-bg');
@@ -1888,7 +1976,7 @@
                     { cx: 72, cy: 32, r: 9 },
                     { cx: 28, cy: 70, r: 8 }
                 ],
-                vesicleColor: 'rgba(212, 165, 165, 0.4)'
+                vesicleColor: 'rgba(212, 165, 165, 0.7)'
             },
             postdoc: {
                 cellGrad: 'postdocCellGrad',
@@ -1902,7 +1990,7 @@
                     { cx: 25, cy: 35, r: 6 },
                     { cx: 30, cy: 72, r: 7 }
                 ],
-                vesicleColor: 'rgba(212, 184, 150, 0.4)'
+                vesicleColor: 'rgba(212, 184, 150, 0.7)'
             },
             technician: {
                 cellGrad: 'techCellGrad',
@@ -1916,7 +2004,7 @@
                     { cx: 24, cy: 32, r: 5 },
                     { cx: 28, cy: 68, r: 6 }
                 ],
-                vesicleColor: 'rgba(165, 196, 184, 0.4)'
+                vesicleColor: 'rgba(165, 196, 184, 0.7)'
             },
             phd: {
                 cellGrad: 'phdCellGrad',
@@ -1936,7 +2024,7 @@
                     { cx: 55, cy: 78, r: 2 },
                     { cx: 62, cy: 22, r: 2 }
                 ],
-                vesicleColor: 'rgba(165, 184, 212, 0.4)'
+                vesicleColor: 'rgba(165, 184, 212, 0.7)'
             }
         };
 
@@ -1962,7 +2050,7 @@
         teamGrid.innerHTML = CONFIG.team.map((member, i) => {
             // Build profile links if any exist
             let linksHtml = '';
-            const hasLinks = member.googleScholar || member.linkedin || member.researchGate;
+            const hasLinks = member.googleScholar || member.linkedin || member.researchGate || member.github || member.orcid || member.website;
             if (hasLinks) {
                 linksHtml = '<div class="team-links">';
                 if (member.googleScholar) {
@@ -1978,6 +2066,22 @@
                 if (member.researchGate) {
                     linksHtml += `<a href="${member.researchGate}" target="_blank" rel="noopener" class="team-link" title="ResearchGate">
                         <svg viewBox="0 0 24 24"><path d="M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.936-1.213 1.68a3.193 3.193 0 0 0-.112.437 8.365 8.365 0 0 0-.078.53 9 9 0 0 0-.05.727c-.01.282-.013.621-.013 1.016a31.121 31.121 0 0 0 .014 1.017 9 9 0 0 0 .05.727 7.946 7.946 0 0 0 .078.53h-.005a3.334 3.334 0 0 0 .112.44c.244.743.65 1.303 1.214 1.68.565.376 1.256.564 2.075.564.8 0 1.536-.213 2.105-.603.57-.39.94-.916 1.175-1.65.076-.235.135-.558.177-.93a10.9 10.9 0 0 0 .043-1.207v-.82c0-.095-.047-.142-.14-.142h-3.064c-.094 0-.14.047-.14.141v.956c0 .094.046.14.14.14h1.666c.056 0 .084.03.084.086 0 .36 0 .62-.036.865-.038.244-.1.447-.147.606-.108.335-.311.622-.575.82-.263.2-.686.31-1.2.31-.507 0-.946-.105-1.232-.296-.287-.19-.503-.478-.645-.855a3.28 3.28 0 0 1-.113-.44 8.544 8.544 0 0 1-.078-.53 9.313 9.313 0 0 1-.05-.727c-.013-.282-.02-.621-.02-1.017s.007-.735.02-1.016a9 9 0 0 1 .05-.727 7.946 7.946 0 0 1 .078-.53 3.28 3.28 0 0 1 .113-.44c.142-.376.358-.664.645-.855.286-.19.725-.295 1.232-.295.347 0 .623.045.826.138.203.09.37.214.502.368.13.153.227.322.288.506.06.183.09.38.09.584 0 .094.047.14.14.14h1.666c.094 0 .14-.046.14-.14a3.158 3.158 0 0 0-.174-.965 2.922 2.922 0 0 0-.534-.89 2.862 2.862 0 0 0-.926-.665c-.38-.18-.848-.27-1.403-.27-.68 0-1.27.147-1.768.44a2.718 2.718 0 0 0-1.07 1.178h-.005v-1.31c0-.093-.047-.14-.14-.14H15.79c-.093 0-.14.047-.14.14v9.48c0 .094.047.14.14.14h1.49c.094 0 .14-.046.14-.14v-3.58h.01a2.854 2.854 0 0 0 1.135 1.274c.517.324 1.147.487 1.89.487.717 0 1.344-.163 1.882-.488a3.16 3.16 0 0 0 1.227-1.41c.288-.616.432-1.36.432-2.23 0-.874-.144-1.617-.432-2.232a3.16 3.16 0 0 0-1.227-1.41c-.538-.324-1.165-.487-1.883-.487zm-9.5 3.085c-.893 0-1.63.242-2.21.725-.58.483-.95 1.126-1.11 1.927h-.005l-.005.03h-.005v.02h-.005v.01h-.005v.01h-.005v.02h-.005v.01h-.005v.02h-.01v.01h-.005v.03h-.005v.01h-.005v.03h-.01l-.01.03v.02l-.005.01v.03l-.005.01v.03l-.005.02v.01l-.005.03v.02l-.005.01v.03l-.005.02v.02l-.005.03v5.82c0 .094.046.14.14.14h1.498c.093 0 .14-.046.14-.14V9.2c0-.142.01-.276.03-.402.023-.126.058-.242.107-.348.098-.212.255-.384.47-.515.216-.13.507-.197.871-.197.36 0 .647.065.86.196.213.13.363.295.45.497.09.202.14.427.152.673v5.64c0 .093.046.14.14.14h1.49c.093 0 .14-.047.14-.14V8.902c0-.438-.065-.835-.196-1.19a2.46 2.46 0 0 0-.587-.914 2.586 2.586 0 0 0-.96-.586 3.67 3.67 0 0 0-1.313-.227zM4.448 3.085c-.446 0-.87.054-1.27.162-.4.108-.77.27-1.11.488a3.07 3.07 0 0 0-.866.815c-.23.326-.393.713-.49 1.16h-.005l-.005.03h-.005v.02h-.005v.015h-.01v.02h-.01l-.005.025-.005.025v.01l-.005.02-.005.025h-.005l-.005.02-.005.02v.01l-.01.04v.02l-.01.02v.03l-.005.01v.03l-.005.01v.03l-.005.02v.02l-.005.02v.03l-.005.02v.13c0 .094.046.14.14.14h1.498c.093 0 .14-.046.14-.14v-.06c0-.06.008-.12.02-.177.01-.056.03-.11.05-.16.043-.1.11-.19.2-.27a1 1 0 0 1 .32-.187 1.18 1.18 0 0 1 .39-.065c.14 0 .265.022.378.065.11.043.207.103.287.18.08.077.14.17.18.276a.954.954 0 0 1 .06.34c0 .12-.02.232-.055.337a.926.926 0 0 1-.17.297 1.23 1.23 0 0 1-.32.262c-.135.08-.303.156-.508.228-.5.173-.93.358-1.293.553a2.9 2.9 0 0 0-.89.697c-.233.273-.4.583-.502.93-.103.346-.155.733-.155 1.16 0 .377.05.73.152 1.056.1.326.26.612.474.855.216.244.487.436.816.577.328.14.715.21 1.16.21.373 0 .73-.054 1.07-.163.338-.108.647-.27.927-.487h.01v.37c0 .093.047.14.14.14h1.49c.093 0 .14-.047.14-.14V7.493c0-.47-.074-.886-.222-1.247a2.417 2.417 0 0 0-.645-.93 2.79 2.79 0 0 0-1.02-.58 4.3 4.3 0 0 0-1.347-.197zm.135 3.753c.218.02.39.076.518.167.13.09.222.207.28.35.06.144.09.31.09.502v2.203a2.1 2.1 0 0 1-.53.336c-.21.09-.442.136-.693.136-.25 0-.464-.04-.643-.12a1.03 1.03 0 0 1-.413-.33 1.31 1.31 0 0 1-.218-.49 2.542 2.542 0 0 1-.063-.576c0-.232.022-.437.067-.615.045-.177.115-.328.21-.45.097-.124.22-.22.37-.29.15-.068.333-.11.55-.125l.077-.005.07-.002c.076-.002.18.003.328.012z"/></svg>
+                    </a>`;
+                }
+                if (member.github) {
+                    linksHtml += `<a href="${member.github}" target="_blank" rel="noopener" class="team-link" title="GitHub">
+                        <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                    </a>`;
+                }
+                if (member.orcid) {
+                    linksHtml += `<a href="${member.orcid}" target="_blank" rel="noopener" class="team-link" title="ORCID">
+                        <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+                    </a>`;
+                }
+                if (member.website) {
+                    const label = member.websiteLabel || 'Website';
+                    linksHtml += `<a href="${member.website}" target="_blank" rel="noopener" class="team-link" title="${label}">
+                        <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm1 16.057v-3.057h2.994c-.059 1.143-.212 2.24-.456 3.279-.823-.12-1.674-.188-2.538-.222zm1.957 2.162c-.499 1.33-1.159 2.497-1.957 3.456v-3.62c.666.028 1.319.081 1.957.164zm-1.957-7.219v-3.015c.868-.034 1.721-.103 2.548-.224.238 1.027.389 2.111.446 3.239H13zm0-5.014v-3.661c.806.969 1.471 2.15 1.971 3.496-.642.084-1.3.137-1.971.165zm2.703-3.267c1.237.496 2.354 1.228 3.29 2.146-.642.234-1.311.442-2.019.607-.344-.992-.775-1.91-1.271-2.753zm-.69 1.679c.535.96.993 2.025 1.349 3.164-.934.142-1.913.236-2.939.272v-3.194c.561.032 1.108.086 1.59.158zm-4.013.395v3.036h-3.494c.058-1.126.21-2.209.448-3.232.836.124 1.7.193 2.58.228l.466-.032zm-2.053-3.587c-.494.837-.926 1.748-1.274 2.73-.708-.163-1.377-.373-2.018-.607.937-.918 2.053-1.65 3.292-2.123zm-4.182 3.655c.696.236 1.428.445 2.185.618-.349 1.139-.583 2.361-.649 3.634H2.284c.192-1.629.754-3.146 1.607-4.462l.384.21zm-.17 6.462H5.51c.067 1.272.3 2.495.649 3.634-.757.173-1.489.383-2.185.617-.853-1.315-1.415-2.832-1.607-4.461l.248.21zm2.354 5.282c.641-.234 1.31-.443 2.018-.607.347.98.78 1.892 1.274 2.73-1.239-.473-2.355-1.205-3.292-2.123zm2.771-1.532c-.934-.142-1.913-.236-2.939-.272v-3.194c.561.032 1.109-.016 1.59-.088.348 1.139.806 2.204 1.349 3.164.009.19.009.39.009.39h-.009zm1.895 4.318v-3.661c.671.028 1.329.081 1.971.165-.5 1.346-1.165 2.527-1.971 3.496zm5.954-3.267c-.936.918-2.053 1.65-3.29 2.146.496-.843.927-1.761 1.271-2.753.708.165 1.377.373 2.019.607zm-2.771-1.532c-.356-1.14-.814-2.205-1.349-3.164.481-.072 1.03-.126 1.59-.158v3.05c-1.026.036-2.006.13-2.939.272h.698zm4.182-3.655c-.696-.235-1.428-.445-2.185-.618.349-1.139.583-2.361.649-3.634h3.493c-.192 1.629-.754 3.146-1.607 4.462l-.35-.21z"/></svg>
                     </a>`;
                 }
                 linksHtml += '</div>';
@@ -2273,17 +2377,246 @@
        ============================================ */
 
     // ============================================
-    // ELECTRIC SIGNAL ANIMATION
+    // ELECTRIC SIGNAL ANIMATION (Image-Based Paths)
     // ============================================
     const electricCanvas = document.getElementById('electricCanvas');
     const electricCtx = electricCanvas ? electricCanvas.getContext('2d') : null;
     let electricWidth, electricHeight;
     let signals = [];
 
+    // Brightness map for image-based pathfinding
+    let brightnessMap = null;
+    let mapWidth = 0;
+    let mapHeight = 0;
+    let imgOriginalWidth = 0;
+    let imgOriginalHeight = 0;
+    const MAP_SCALE = 4; // Sample every 4th pixel for performance
+
+    // Cover-mode mapping variables (recalculated on resize)
+    let coverScale = 1;
+    let coverOffsetX = 0;
+    let coverOffsetY = 0;
+
+    function updateCoverMapping() {
+        if (!imgOriginalWidth || !imgOriginalHeight) return;
+
+        // Calculate scale to cover viewport (same as CSS background-size: cover)
+        const scaleX = electricWidth / imgOriginalWidth;
+        const scaleY = electricHeight / imgOriginalHeight;
+        coverScale = Math.max(scaleX, scaleY);
+
+        // Calculate centered offset (overflow is cropped equally from both sides)
+        const scaledWidth = imgOriginalWidth * coverScale;
+        const scaledHeight = imgOriginalHeight * coverScale;
+        coverOffsetX = (scaledWidth - electricWidth) / 2;
+        coverOffsetY = (scaledHeight - electricHeight) / 2;
+    }
+
     function resizeElectricCanvas() {
         if (!electricCanvas) return;
         electricWidth = electricCanvas.width = window.innerWidth;
         electricHeight = electricCanvas.height = window.innerHeight;
+        updateCoverMapping();
+    }
+
+    // Load hero image and create brightness map
+    function createBrightnessMap(imageSrc) {
+        return new Promise((resolve) => {
+            const img = new Image();
+
+            const processImage = () => {
+                // Store original dimensions for cover mapping
+                imgOriginalWidth = img.width;
+                imgOriginalHeight = img.height;
+                updateCoverMapping();
+
+                // Create offscreen canvas
+                const offCanvas = document.createElement('canvas');
+                mapWidth = Math.floor(img.width / MAP_SCALE);
+                mapHeight = Math.floor(img.height / MAP_SCALE);
+                offCanvas.width = mapWidth;
+                offCanvas.height = mapHeight;
+
+                const offCtx = offCanvas.getContext('2d');
+                offCtx.drawImage(img, 0, 0, mapWidth, mapHeight);
+
+                try {
+                    const imageData = offCtx.getImageData(0, 0, mapWidth, mapHeight);
+                    const data = imageData.data;
+
+                    // Create brightness array
+                    brightnessMap = new Float32Array(mapWidth * mapHeight);
+                    let minB = 1, maxB = 0;
+
+                    for (let i = 0; i < brightnessMap.length; i++) {
+                        const idx = i * 4;
+                        // Luminance formula
+                        const b = (data[idx] * 0.299 + data[idx + 1] * 0.587 + data[idx + 2] * 0.114) / 255;
+                        brightnessMap[i] = b;
+                        minB = Math.min(minB, b);
+                        maxB = Math.max(maxB, b);
+                    }
+
+                    // Normalize brightness to use full 0-1 range
+                    const range = maxB - minB;
+                    if (range > 0.01) {
+                        for (let i = 0; i < brightnessMap.length; i++) {
+                            brightnessMap[i] = (brightnessMap[i] - minB) / range;
+                        }
+                    }
+
+                    console.log('✅ Brightness map created:', mapWidth, 'x', mapHeight, '| Range:', minB.toFixed(2), '-', maxB.toFixed(2));
+                    resolve(true);
+                } catch (e) {
+                    console.warn('⚠️ CORS blocked image reading. To fix: run a local server (python3 -m http.server)');
+                    console.log('Falling back to random paths');
+                    resolve(false);
+                }
+            };
+
+            img.onload = processImage;
+            img.onerror = () => {
+                console.log('❌ Image load failed, using random paths');
+                resolve(false);
+            };
+
+            // Try without crossOrigin first (works for same-origin)
+            img.src = imageSrc;
+        });
+    }
+
+    // Debug: visualize the brightness map (with cover mapping like hero image)
+    function debugShowBrightnessMap() {
+        if (!brightnessMap) {
+            console.log('No brightness map available');
+            return;
+        }
+        // Pause animation
+        animationRunning = false;
+        electricCtx.clearRect(0, 0, electricWidth, electricHeight);
+
+        // Draw using the same cover mapping as the hero image
+        const step = 2; // Sample every 2 pixels for speed
+        for (let screenY = 0; screenY < electricHeight; screenY += step) {
+            for (let screenX = 0; screenX < electricWidth; screenX += step) {
+                const b = getBrightness(screenX, screenY);
+                if (b > 0.1) {
+                    electricCtx.fillStyle = `rgba(168, 85, 247, ${b})`;
+                    electricCtx.fillRect(screenX, screenY, step, step);
+                }
+            }
+        }
+        console.log('Debug: brightness map visualized with cover mapping. Purple = paths. Type resumeAnimation() to continue.');
+    }
+
+    function resumeAnimation() {
+        animationRunning = true;
+        animateElectric();
+        console.log('Animation resumed.');
+    }
+    // Expose for console: debugShowBrightnessMap(), resumeAnimation()
+
+    // Get brightness at screen position (0-1), accounting for background-size: cover
+    function getBrightness(screenX, screenY) {
+        if (!brightnessMap) return 0.5;
+
+        // Convert screen coords to image coords (accounting for cover crop/scale)
+        const imgX = (screenX + coverOffsetX) / coverScale;
+        const imgY = (screenY + coverOffsetY) / coverScale;
+
+        // Convert to map coords
+        const mapX = Math.floor(imgX / MAP_SCALE);
+        const mapY = Math.floor(imgY / MAP_SCALE);
+
+        if (mapX < 0 || mapX >= mapWidth || mapY < 0 || mapY >= mapHeight) return 0;
+
+        return brightnessMap[mapY * mapWidth + mapX];
+    }
+
+    // Find best direction to follow path (look-ahead approach)
+    function findBestDirection(x, y, currentAngle, lookAhead = 60) {
+        if (!brightnessMap) return { angle: currentAngle + (Math.random() - 0.5) * 0.3, onPath: false };
+
+        const currentBrightness = getBrightness(x, y);
+        const onPath = currentBrightness > 0.3;
+
+        // Sample directions to find continuous path
+        const samples = 20;
+        const spread = Math.PI * 0.9; // Look within ~80 degrees of current direction
+
+        let bestAngle = currentAngle;
+        let bestScore = -1;
+
+        for (let i = 0; i < samples; i++) {
+            const angleOffset = ((i / (samples - 1)) - 0.5) * spread;
+            const testAngle = currentAngle + angleOffset;
+
+            // Check path continuity - all points must be on path
+            let score = 0;
+            let continuous = true;
+
+            for (let dist = 5; dist <= lookAhead; dist += 5) {
+                const testX = x + Math.cos(testAngle) * dist;
+                const testY = y + Math.sin(testAngle) * dist;
+                const b = getBrightness(testX, testY);
+
+                // If we hit a dark spot, path is broken - heavily penalize
+                if (b < 0.25) {
+                    continuous = false;
+                    score *= 0.1; // Massive penalty for crossing dark areas
+                    break;
+                }
+                score += b;
+            }
+
+            // Bonus for continuous paths
+            if (continuous) score *= 1.5;
+
+            // Preference for going straight
+            const straightBonus = 1 - Math.abs(angleOffset) / spread * 0.4;
+            score *= straightBonus;
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestAngle = testAngle;
+            }
+        }
+
+        return { angle: bestAngle, onPath: onPath, score: bestScore };
+    }
+
+    // Find a starting point on a path
+    function findBrightSpot() {
+        if (!brightnessMap) {
+            return { x: Math.random() * electricWidth, y: Math.random() * electricHeight, angle: Math.random() * Math.PI * 2 };
+        }
+
+        // Try random positions until we find one on a path
+        for (let i = 0; i < 100; i++) {
+            const x = Math.random() * electricWidth;
+            const y = Math.random() * electricHeight;
+            const b = getBrightness(x, y);
+
+            if (b > 0.5) {  // On a path (white area)
+                // Find initial direction along the path
+                let bestAngle = Math.random() * Math.PI * 2;
+                let bestScore = 0;
+                for (let a = 0; a < 8; a++) {
+                    const angle = (a / 8) * Math.PI * 2;
+                    const testX = x + Math.cos(angle) * 30;
+                    const testY = y + Math.sin(angle) * 30;
+                    const score = getBrightness(testX, testY);
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestAngle = angle;
+                    }
+                }
+                return { x, y, angle: bestAngle };
+            }
+        }
+
+        // Fallback
+        return { x: electricWidth / 2, y: electricHeight / 2, angle: Math.random() * Math.PI * 2 };
     }
 
     class SignalPulse {
@@ -2292,45 +2625,55 @@
         }
 
         reset() {
-            const edge = Math.floor(Math.random() * 4);
-            switch(edge) {
-                case 0: // Top
-                    this.x = Math.random() * electricWidth;
-                    this.y = 0;
-                    this.angle = Math.PI / 2 + (Math.random() - 0.5) * 0.8;
-                    break;
-                case 1: // Right
-                    this.x = electricWidth;
-                    this.y = Math.random() * electricHeight;
-                    this.angle = Math.PI + (Math.random() - 0.5) * 0.8;
-                    break;
-                case 2: // Bottom
-                    this.x = Math.random() * electricWidth;
-                    this.y = electricHeight;
-                    this.angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.8;
-                    break;
-                case 3: // Left
-                    this.x = 0;
-                    this.y = Math.random() * electricHeight;
-                    this.angle = (Math.random() - 0.5) * 0.8;
-                    break;
-            }
+            // Start on a path with direction along it
+            const start = findBrightSpot();
+            this.x = start.x;
+            this.y = start.y;
+            this.angle = start.angle;
 
-            this.speed = 1.5 + Math.random() * 2;
+            const cfg = CONFIG.pulses || { speed: 2, size: 1, length: 10, sparkle: 5, hue: 45 };
+            this.speed = (cfg.speed * 0.75) + Math.random() * (cfg.speed * 0.5);
             this.trail = [];
-            this.maxTrail = 6 + Math.floor(Math.random() * 6);
-            this.life = 1;
-            this.hue = 270 + Math.random() * 40;
-            this.thickness = 0.5 + Math.random() * 1;
+            this.maxTrail = Math.floor(cfg.length * 0.7) + Math.floor(Math.random() * cfg.length * 0.6);
+            // Vary initial life so comets don't all die at once (staggered lifespans)
+            this.life = 0.4 + Math.random() * 0.6; // Start between 40-100% life
+            // Calculate decay from lifetime (in seconds) - at 60fps: decay = 1 / (lifetime * 60)
+            const lifetime = cfg.lifetime || 30; // Default 30 seconds
+            const baseDecay = 1 / (lifetime * 60);
+            // Vary individual decay rate (±40% variation for natural feel)
+            this.myLifeDecay = baseDecay * (0.6 + Math.random() * 0.8);
+            const baseHue = cfg.hue !== undefined ? cfg.hue : 45;
+            this.hue = baseHue + (Math.random() - 0.5) * 20; // Slight variation around base hue
+            this.saturation = cfg.saturation !== undefined ? cfg.saturation : 100; // 0-100%
+            this.thickness = (cfg.size * 0.6) + Math.random() * (cfg.size * 0.8);
             this.branches = [];
-            this.branchChance = 0.015;
+            this.branchChance = 0.012;
+            this.sparkles = []; // Sparkling trail particles
+            this.sparkleTimer = 0;
+            this.sparkleRate = Math.max(1, Math.floor(6 - (cfg.sparkle || 5) * 0.5)); // Higher sparkle = more frequent
         }
 
         update() {
-            this.angle += (Math.random() - 0.5) * 0.12;
+            // Find best direction by looking ahead along the path
+            const direction = findBestDirection(this.x, this.y, this.angle, 80);
+
+            // Smoothly turn toward best direction
+            let angleDiff = direction.angle - this.angle;
+            while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+            while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+
+            // Turn quickly to follow path
+            const turnSpeed = direction.onPath ? 0.35 : 0.25;
+            this.angle += angleDiff * turnSpeed;
+
+            // Minimal random variation
+            this.angle += (Math.random() - 0.5) * 0.01;
+
+            // Move
             this.x += Math.cos(this.angle) * this.speed;
             this.y += Math.sin(this.angle) * this.speed;
 
+            // Add to trail
             this.trail.push({ x: this.x, y: this.y, alpha: 1 });
 
             if (this.trail.length > this.maxTrail) {
@@ -2341,7 +2684,37 @@
                 p.alpha = (i / this.trail.length) * this.life;
             });
 
-            if (Math.random() < this.branchChance && this.branches.length < 2) {
+            // Spawn sparkles along the trail
+            this.sparkleTimer++;
+            const sparkleIntensity = CONFIG.pulses?.sparkle || 5;
+            if (this.sparkleTimer >= this.sparkleRate) {
+                this.sparkleTimer = 0;
+                // Add sparkles at current position with random offset
+                const sparkleOffset = 8 + sparkleIntensity;
+                const numSparkles = Math.ceil(sparkleIntensity / 3); // More sparkles with higher intensity
+                for (let i = 0; i < numSparkles; i++) {
+                    this.sparkles.push({
+                        x: this.x + (Math.random() - 0.5) * sparkleOffset,
+                        y: this.y + (Math.random() - 0.5) * sparkleOffset,
+                        life: 1,
+                        size: 1 + Math.random() * (1 + sparkleIntensity * 0.3),
+                        twinkleSpeed: 0.05 + Math.random() * 0.1,
+                        twinklePhase: Math.random() * Math.PI * 2
+                    });
+                }
+            }
+
+            // Update and fade sparkles
+            const sparkleFade = CONFIG.pulses?.sparkleFade || 0.003;
+            this.sparkles.forEach(s => {
+                s.life -= sparkleFade;
+                s.twinklePhase += s.twinkleSpeed;
+            });
+            this.sparkles = this.sparkles.filter(s => s.life > 0);
+
+            // Branch occasionally when on path
+            const onPath = getBrightness(this.x, this.y) > 0.5;
+            if (onPath && Math.random() < this.branchChance && this.branches.length < 2) {
                 this.branches.push({
                     x: this.x,
                     y: this.y,
@@ -2352,102 +2725,232 @@
                 });
             }
 
+            // Update branches (follow paths)
             this.branches.forEach(branch => {
-                branch.angle += (Math.random() - 0.5) * 0.15;
+                const branchDir = findBestDirection(branch.x, branch.y, branch.angle, 40);
+                let angleDiff = branchDir.angle - branch.angle;
+                while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+                while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+                branch.angle += angleDiff * 0.15;
+                branch.angle += (Math.random() - 0.5) * 0.02;
                 branch.x += Math.cos(branch.angle) * branch.speed;
                 branch.y += Math.sin(branch.angle) * branch.speed;
                 branch.trail.push({ x: branch.x, y: branch.y, alpha: branch.life });
-                if (branch.trail.length > 10) branch.trail.shift();
-                branch.life -= 0.025;
+                if (branch.trail.length > 15) branch.trail.shift();
+                branch.life -= 0.015;
             });
 
             this.branches = this.branches.filter(b => b.life > 0);
 
+            // General life decay (using individual rate for staggered deaths)
+            this.life -= this.myLifeDecay;
+
+            // Extra fade when leaving screen
             if (this.x < -50 || this.x > electricWidth + 50 ||
                 this.y < -50 || this.y > electricHeight + 50) {
-                this.life -= 0.05;
+                this.life -= 0.02; // Fast fade off-screen
+            }
+
+            // Extra fade when off path
+            const pathBrightness = getBrightness(this.x, this.y);
+            if (pathBrightness < 0.3) {
+                this.life -= 0.008;
+            } else if (pathBrightness < 0.5) {
+                this.life -= 0.002;
             }
 
             return this.life > 0;
         }
 
         draw() {
-            if (this.trail.length > 1) {
+            // Draw sparkles first (behind the comet)
+            this.sparkles.forEach(s => {
+                // Twinkle effect
+                const twinkle = 0.5 + 0.5 * Math.sin(s.twinklePhase);
+                // Use cubic curve for smooth gradual fade (life^3 approaches 0 smoothly)
+                const fadeCurve = s.life * s.life * s.life;
+                const sparkleOpacity = fadeCurve * twinkle * 0.9;
+                // Also shrink sparkle as it fades for smoother disappearance
+                const fadeSize = s.size * (0.2 + s.life * 0.8);
+
+                // Sparkle glow
+                const sparkGrad = electricCtx.createRadialGradient(
+                    s.x, s.y, 0,
+                    s.x, s.y, fadeSize * 3
+                );
+                sparkGrad.addColorStop(0, `hsla(${this.hue + 10}, ${this.saturation}%, 95%, ${sparkleOpacity})`);
+                sparkGrad.addColorStop(0.3, `hsla(${this.hue}, ${this.saturation * 0.9}%, 70%, ${sparkleOpacity * 0.6})`);
+                sparkGrad.addColorStop(1, 'transparent');
+
                 electricCtx.beginPath();
-                electricCtx.moveTo(this.trail[0].x, this.trail[0].y);
+                electricCtx.arc(s.x, s.y, fadeSize * 3, 0, Math.PI * 2);
+                electricCtx.fillStyle = sparkGrad;
+                electricCtx.fill();
 
-                for (let i = 1; i < this.trail.length; i++) {
-                    electricCtx.lineTo(this.trail[i].x, this.trail[i].y);
-                }
+                // Bright center point (also shrinks)
+                electricCtx.beginPath();
+                electricCtx.arc(s.x, s.y, fadeSize * 0.5, 0, Math.PI * 2);
+                electricCtx.fillStyle = `hsla(55, 100%, 95%, ${sparkleOpacity})`;
+                electricCtx.fill();
+            });
 
-                electricCtx.strokeStyle = `hsla(${this.hue}, 80%, 70%, ${this.life * 0.7})`;
-                electricCtx.lineWidth = this.thickness;
+            if (this.trail.length > 1) {
                 electricCtx.lineCap = 'round';
                 electricCtx.lineJoin = 'round';
-                electricCtx.stroke();
 
-                electricCtx.strokeStyle = `hsla(${this.hue}, 100%, 80%, ${this.life * 0.2})`;
-                electricCtx.lineWidth = this.thickness + 2;
-                electricCtx.stroke();
+                // Draw each segment with tapering thickness and fading opacity
+                for (let i = 0; i < this.trail.length - 1; i++) {
+                    const p1 = this.trail[i];
+                    const p2 = this.trail[i + 1];
+
+                    // Progress: 0 at tail, 1 at head
+                    const progress = i / (this.trail.length - 1);
+
+                    // Thickness tapers from full at head to 0.1 at tail
+                    const segmentThickness = this.thickness * (0.1 + progress * 0.9);
+
+                    // Opacity fades from full at head to 0.1 at tail
+                    const segmentOpacity = this.life * (0.1 + progress * 0.7);
+
+                    // Draw outer glow (warm golden)
+                    electricCtx.beginPath();
+                    electricCtx.moveTo(p1.x, p1.y);
+                    electricCtx.lineTo(p2.x, p2.y);
+                    electricCtx.strokeStyle = `hsla(${this.hue - 5}, ${this.saturation * 0.8}%, 50%, ${segmentOpacity * 0.25})`;
+                    electricCtx.lineWidth = segmentThickness + 6;
+                    electricCtx.stroke();
+
+                    // Draw middle glow
+                    electricCtx.beginPath();
+                    electricCtx.moveTo(p1.x, p1.y);
+                    electricCtx.lineTo(p2.x, p2.y);
+                    electricCtx.strokeStyle = `hsla(${this.hue}, ${this.saturation * 0.9}%, 65%, ${segmentOpacity * 0.5})`;
+                    electricCtx.lineWidth = segmentThickness + 3;
+                    electricCtx.stroke();
+
+                    // Draw main trail (bright golden core)
+                    electricCtx.beginPath();
+                    electricCtx.moveTo(p1.x, p1.y);
+                    electricCtx.lineTo(p2.x, p2.y);
+                    electricCtx.strokeStyle = `hsla(${this.hue + 10}, ${this.saturation * 0.95}%, 75%, ${segmentOpacity})`;
+                    electricCtx.lineWidth = segmentThickness;
+                    electricCtx.stroke();
+                }
             }
 
+            // Draw glowing comet head
             const head = this.trail[this.trail.length - 1];
             if (head) {
-                const gradient = electricCtx.createRadialGradient(
+                // Outer warm glow
+                const outerGlow = electricCtx.createRadialGradient(
+                    head.x, head.y, 0,
+                    head.x, head.y, 20
+                );
+                outerGlow.addColorStop(0, `hsla(${this.hue}, ${this.saturation}%, 70%, ${this.life * 0.6})`);
+                outerGlow.addColorStop(0.5, `hsla(${this.hue - 10}, ${this.saturation * 0.8}%, 50%, ${this.life * 0.3})`);
+                outerGlow.addColorStop(1, 'transparent');
+
+                electricCtx.beginPath();
+                electricCtx.arc(head.x, head.y, 20, 0, Math.PI * 2);
+                electricCtx.fillStyle = outerGlow;
+                electricCtx.fill();
+
+                // Bright core
+                const coreGlow = electricCtx.createRadialGradient(
                     head.x, head.y, 0,
                     head.x, head.y, 8
                 );
-                gradient.addColorStop(0, `hsla(${this.hue}, 100%, 90%, ${this.life * 0.9})`);
-                gradient.addColorStop(0.5, `hsla(${this.hue}, 100%, 70%, ${this.life * 0.4})`);
-                gradient.addColorStop(1, 'transparent');
+                coreGlow.addColorStop(0, `hsla(55, ${this.saturation}%, 98%, ${this.life * 0.95})`);
+                coreGlow.addColorStop(0.4, `hsla(${this.hue + 15}, ${this.saturation}%, 80%, ${this.life * 0.7})`);
+                coreGlow.addColorStop(1, 'transparent');
 
                 electricCtx.beginPath();
                 electricCtx.arc(head.x, head.y, 8, 0, Math.PI * 2);
-                electricCtx.fillStyle = gradient;
+                electricCtx.fillStyle = coreGlow;
                 electricCtx.fill();
             }
 
+            // Draw branches with same golden tapering effect
             this.branches.forEach(branch => {
                 if (branch.trail.length > 1) {
-                    electricCtx.beginPath();
-                    electricCtx.moveTo(branch.trail[0].x, branch.trail[0].y);
-                    branch.trail.forEach(p => electricCtx.lineTo(p.x, p.y));
-                    electricCtx.strokeStyle = `hsla(${this.hue}, 80%, 70%, ${branch.life * 0.5})`;
-                    electricCtx.lineWidth = this.thickness * 0.5;
-                    electricCtx.stroke();
+                    for (let i = 0; i < branch.trail.length - 1; i++) {
+                        const p1 = branch.trail[i];
+                        const p2 = branch.trail[i + 1];
+                        const progress = i / (branch.trail.length - 1);
+                        const segmentThickness = this.thickness * 0.5 * (0.1 + progress * 0.9);
+                        const segmentOpacity = branch.life * (0.1 + progress * 0.4);
+
+                        electricCtx.beginPath();
+                        electricCtx.moveTo(p1.x, p1.y);
+                        electricCtx.lineTo(p2.x, p2.y);
+                        electricCtx.strokeStyle = `hsla(${this.hue}, ${this.saturation * 0.9}%, 70%, ${segmentOpacity})`;
+                        electricCtx.lineWidth = segmentThickness;
+                        electricCtx.stroke();
+                    }
+
+                    // Branch head glow
+                    const bHead = branch.trail[branch.trail.length - 1];
+                    if (bHead) {
+                        const bGrad = electricCtx.createRadialGradient(bHead.x, bHead.y, 0, bHead.x, bHead.y, 5);
+                        bGrad.addColorStop(0, `hsla(55, ${this.saturation}%, 90%, ${branch.life * 0.7})`);
+                        bGrad.addColorStop(1, 'transparent');
+                        electricCtx.beginPath();
+                        electricCtx.arc(bHead.x, bHead.y, 5, 0, Math.PI * 2);
+                        electricCtx.fillStyle = bGrad;
+                        electricCtx.fill();
+                    }
                 }
             });
         }
     }
 
     function animateElectric() {
-        if (!electricCtx) return;
+        if (!electricCtx || !animationRunning) return;
 
-        electricCtx.fillStyle = 'rgba(3, 1, 8, 0.4)';
+        // Fade previous frame
+        electricCtx.fillStyle = 'rgba(3, 1, 8, 0.35)';
         electricCtx.fillRect(0, 0, electricWidth, electricHeight);
 
-        if (signals.length < 6 && Math.random() < 0.025) {
+        // Maintain configured number of active signals
+        const targetCount = CONFIG.pulses?.count || 6;
+        if (signals.length < targetCount && Math.random() < 0.03) {
             signals.push(new SignalPulse());
         }
 
         signals = signals.filter(signal => {
             const alive = signal.update();
             if (alive) signal.draw();
-            else signals.push(new SignalPulse());
+            else if (signals.length < targetCount - 2) signals.push(new SignalPulse());
             return alive;
         });
 
         requestAnimationFrame(animateElectric);
     }
 
-    function initElectricAnimation() {
+    let animationRunning = true;
+    let resizeTimeout = null;
+
+    async function initElectricAnimation() {
         if (!electricCanvas) return;
         resizeElectricCanvas();
-        window.addEventListener('resize', resizeElectricCanvas);
+        window.addEventListener('resize', () => {
+            resizeElectricCanvas();
+            // Debounce: only recreate map after resize stops
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                createBrightnessMap('images/paths.png');
+            }, 300);
+        });
 
-        for (let i = 0; i < 4; i++) {
+        // Load path map from separate mask image (white = paths, black = avoid)
+        await createBrightnessMap('images/paths.png');
+
+        // Start with configured number of signals
+        const initialCount = CONFIG.pulses?.count || 6;
+        for (let i = 0; i < initialCount; i++) {
             signals.push(new SignalPulse());
         }
+        animationRunning = true;
         animateElectric();
     }
 
