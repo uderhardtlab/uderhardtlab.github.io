@@ -221,9 +221,10 @@
         #electricCanvas {
             position: absolute;
             inset: 0;
-            z-index: 2;
-            pointer-events: none;
+            z-index: 5;
+            pointer-events: auto;
             mix-blend-mode: screen;
+            cursor: crosshair;
         }
 
         .hero-glow {
@@ -514,10 +515,27 @@
             padding: 1.5rem;
         }
 
-        .cell-avatar {
+        .cell-avatar-wrapper {
             width: 120px;
             height: 120px;
             margin: 0 auto 1.5rem;
+            cursor: pointer;
+        }
+
+        .cell-avatar {
+            width: 100%;
+            height: 100%;
+        }
+
+        .team-member:hover .cell-avatar-wrapper {
+            animation: cellWiggle 0.5s ease-in-out infinite;
+        }
+
+        @keyframes cellWiggle {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-3deg) scale(1.05); }
+            50% { transform: rotate(0deg) scale(1.08); }
+            75% { transform: rotate(3deg) scale(1.05); }
         }
 
         .cell-blob {
@@ -683,10 +701,29 @@
         }
 
         .funding-category.expanded .funding-entries {
-            max-height: 500px;
+            max-height: 300px;
+            overflow-y: auto;
             margin-top: 1rem;
             padding-top: 1rem;
             border-top: 1px solid rgba(168, 85, 247, 0.15);
+        }
+
+        .funding-entries::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .funding-entries::-webkit-scrollbar-track {
+            background: rgba(168, 85, 247, 0.1);
+            border-radius: 3px;
+        }
+
+        .funding-entries::-webkit-scrollbar-thumb {
+            background: rgba(168, 85, 247, 0.4);
+            border-radius: 3px;
+        }
+
+        .funding-entries::-webkit-scrollbar-thumb:hover {
+            background: rgba(168, 85, 247, 0.6);
         }
 
         .funding-entry {
@@ -1929,11 +1966,11 @@
                 logo: "images/dfg.png",
                 entries: [{ program: "upcoming.... CRC1755 CASCAID", website: "https://www.fau.eu/2025/11/news/research/fau-mit-drei-sonderforschungsbereichen-erfolgreich/", description: "Cellular and systems control of autoimmune disease" },
                     { program: "FOR5775 MagNet", website: "https://www.limes-institut-bonn.de/en/research/research-departments/unit-1/mass-lab/news/articles/news/die-choreographen-der-gewebe-entwicklung-und-funktion-im-fokus/", description: "Macrophage Niche Network Dynamics - Defining macrophages as choreographers of tissue development and function" },
-                    { program: "CRU5024 GB.com", website: "https://www.kfo5024.med.fau.de", description: "Immune checkpoints of gut-brain communication in inflammatory and neurodegenerative diseases
-" },
+                    { program: "CRU5024 GB.com", website: "https://www.kfo5024.med.fau.de", description: "Immune checkpoints of gut-brain communication in inflammatory and neurodegenerative diseases" },
                     { program: "TRR369 DIONE", website: "https://www.trr369-dione.com", description: "Degeneration of bone due to inflammation" },
                     { program: "TRR374 RENPRO", website: "https://www.uni-regensburg.de/biologie-vorklinische-medizin/forschen/verbundprojekte/trr-374/ueber-den-trr374-renpro", description: "Tubular system and interstitium of the kidney: (Patho-)physiology and crosstalk" },
                     { program: "FOR2886 PANDORA", website: "https://www.pandora.for2886.forschung.fau.de", description: "Pathways triggering autoimmunity and defining onset of early Reumatoid Arthritis" },
+                    { program: "RTG2740 Immunomicrotope", website: "https://www.immunomicrotope.de", description: "Microenvironmental, metabolic and microbial signals regulating immune cell-pathogen interactions" },
                     { program: "DFG Heisenberg professorship", website: "https://gepris.dfg.de/gepris/projekt/448121430?language=en", description: "Assessing tissue-protective functions of macrophages through integrative and functional tissue-level biology." }]
             },
             erc: {
@@ -2037,6 +2074,36 @@
 <h4>Why this matters clinically...</h4>
 <br>
 <p>Clinically, this opens up a conceptual bridge between seemingly “hematologic” age-related clonal hematopoiesis and late-onset neurodegenerative motor syndromes, suggesting that some atypical parkinsonian presentations in the elderly may in fact be myeloid clone–driven brain disease rather than primary neuron-intrinsic pathology. It argues that when we detect DNMT3A (or related epigenetic regulator) mutations in older individuals—currently mostly flagged as cardiovascular or leukemic risk factors—we should also start thinking about their myeloid progeny seeding microglial niches and modulating brain circuits. From a translational angle, this work motivates longitudinal clinical-genetic studies linking clonal hematopoiesis genotypes to motor outcomes, and raises the possibility that dampening or editing pathogenic MoMg clones, or selectively targeting their aberrant antigen-presentation/chemokine programs, could offer a completely new entry point for disease modification in atypical parkinsonism and related age-associated motor decline.</p>`,
+                    media: []
+                }
+            ],
+            2024: [
+                {
+                    title: "Understanding dental pulp inflammation: from signaling to structure.",
+                    authors: "Pohl S, Akamp T, Smeda M, Uderhardt S, Besold D, Krastl G, Galler KM, Buchalla W, Widbiller M",
+                    journal: "Frontiers in immunology, 2024",
+                    publisherUrl: "https://doi.org/10.3389/fimmu.2024.1474466",
+                    depositUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11554472/",
+                    codeUrl: "",
+                    graphicalAbstract: "images/pulp.png",
+                    description: `<p>In this review, we take a deep dive into how the “living” pulp responds immunologically and structurally to caries and other insults – essentially treating the pulp as a constrained, neuro‑immune organ where even modest edema and cell influx have outsized consequences for pain and tissue fate.</p>
+
+<p>Pulp anatomy (rigid dentin walls, apical foramen bottleneck, dense innervation) creates a high-pressure inflammatory compartment where classic signs of inflammation—vasodilation, edema, leukocyte influx—rapidly translate into pain and risk of necrosis rather than “benign” swelling. Odontoblasts, fibroblasts and resident immune cells together form a pre‑positioned sentinel network: odontoblasts behave like a pseudo-epithelium sensing PAMPs/DAMPs via TLRs/NLRs, releasing antimicrobial peptides, chemokines and VEGF, while fibroblasts provide complement locally and shape leukocyte recruitment and nerve sprouting. We also highlight the steady-state immune landscape (neutrophils, T cells, monocytes/macrophages, DCs, rare NK/B cells) and how it shifts from neutrophil‑dominated acute responses to increased B cells and macrophage polarization in chronic pulpitis.</p>
+<br>
+
+<h4>From triggers to structural failure</h4>
+<br>
+<p>We map the upstream triggers (bacterial acids and metabolites penetrating dentin before frank pulp exposure, cross‑kingdom interactions with fungi such as Candida, and likely contributions of viruses/phages) to specific PRR pathways (TLR2/4/5/9, CLRs, NLRs, RLRs, NLRP3 inflammasome) engaged on odontoblasts, fibroblasts and leukocytes. Once engaged, these sensors drive a stereotyped but spatially constrained cascade: rapid neutrophil influx with phagocytosis, degranulation, ROS/RNS and NET formation, followed by monocyte/macrophage recruitment and DC‑mediated priming of T cells that return to the pulp via effector trafficking. In parallel, a rich mediator milieu (histamine, prostaglandins, leukotrienes, complement, kinins, substance P, cytokines, chemokines and specialized pro‑resolving mediators like lipoxins, resolvins, maresins) regulates vascular tone, permeability, nociceptor activation and the switch from M1‑type antimicrobial programs to M2‑type, Treg‑supported resolution and repair.</p>
+<br>
+
+<h4>Pulp remodeling</h4>
+<br>
+<p>We connect these signaling events to tangible structural transitions in the pulp–dentin complex, re‑interpreting classic histology through an immunology lens. Early, localized inflammation manifests as vasodilation, extravasation and leukocyte cuffs beneath the odontoblast layer with reactive dentin formation; as intensity and duration increase, we see microabscesses, tissue liquefaction, loss of odontoblastic continuity and eventually compartment‑wide necrosis constrained by rigid dentin walls. DPSCs and fibroblasts sit at the interface of damage and repair: under controlled inflammation they migrate, differentiate and lay down reparative dentin, but under persistent signaling they instead help drive fibrosis, altered innervation and chronic pain phenotypes.</p>
+<br>
+
+<h4>Why this matters clinically...</h4>
+<br>
+<p>Clinically, we argue that “reversible vs irreversible pulpitis” is best understood as a failure or success of timely resolution in a closed space, determined by the balance between pro‑inflammatory PRR signaling and pro‑resolving/macrophage‑reprogramming pathways rather than simple symptom labels. This framework supports pushing vital pulp therapy further: if we can modulate odontoblast and fibroblast PRR responsiveness, tune complement and lipid mediator profiles, or bias macrophages and DPSCs toward pro‑resolving, regenerative states, we may preserve pulp vitality in cases that currently go straight to full root canal treatment. It also opens the door to more mechanistically rational adjuncts (local pro‑resolving mediators, inflammasome or TLR modulators, neuroimmune-targeted analgesics) layered on top of good caries control and minimally invasive operative dentistry.</p>`,
                     media: []
                 }
             ]
@@ -2315,12 +2382,14 @@
         ).join('');
 
         return `
-            <svg viewBox="0 0 100 100" class="cell-avatar">
-                <path class="cell-blob" fill="url(#${cfg.cellGrad})" filter="url(#${cfg.filter})"
-                    d="M 50 8 C 78 6, 94 22, 92 50 C 95 75, 80 92, 52 94 C 25 97, 8 80, 6 52 C 3 25, 20 10, 50 8"/>
-                <ellipse class="cell-nucleus" fill="url(#${cfg.nucleusGrad})" cx="48" cy="48" rx="${cfg.nucleusRx}" ry="${cfg.nucleusRy}"/>
-                ${vesiclesSvg}
-            </svg>
+            <div class="cell-avatar-wrapper">
+                <svg viewBox="0 0 100 100" class="cell-avatar">
+                    <path class="cell-blob" fill="url(#${cfg.cellGrad})" filter="url(#${cfg.filter})"
+                        d="M 50 8 C 78 6, 94 22, 92 50 C 95 75, 80 92, 52 94 C 25 97, 8 80, 6 52 C 3 25, 20 10, 50 8"/>
+                    <ellipse class="cell-nucleus" fill="url(#${cfg.nucleusGrad})" cx="48" cy="48" rx="${cfg.nucleusRx}" ry="${cfg.nucleusRy}"/>
+                    ${vesiclesSvg}
+                </svg>
+            </div>
         `;
     }
 
@@ -2787,6 +2856,11 @@
     let electricWidth, electricHeight;
     let signals = [];
 
+    // Mouse tracking for comet guidance
+    let mouseX = -1000;
+    let mouseY = -1000;
+    let mouseActive = false;
+
     // Brightness map for image-based pathfinding
     let brightnessMap = null;
     let mapWidth = 0;
@@ -2950,6 +3024,18 @@
         const currentBrightness = getBrightness(x, y);
         const onPath = currentBrightness > 0.3;
 
+        // Calculate mouse attraction angle if mouse is active
+        let mouseAngle = null;
+        let mouseDist = Infinity;
+        if (mouseActive) {
+            const dx = mouseX - x;
+            const dy = mouseY - y;
+            mouseDist = Math.sqrt(dx * dx + dy * dy);
+            if (mouseDist < 500) {
+                mouseAngle = Math.atan2(dy, dx);
+            }
+        }
+
         // Sample directions to find continuous path
         const samples = 20;
         const spread = Math.PI * 0.9; // Look within ~80 degrees of current direction
@@ -2985,6 +3071,20 @@
             // Preference for going straight
             const straightBonus = 1 - Math.abs(angleOffset) / spread * 0.4;
             score *= straightBonus;
+
+            // Mouse attraction bonus - favor paths leading toward mouse
+            if (mouseAngle !== null) {
+                let angleDiffToMouse = testAngle - mouseAngle;
+                while (angleDiffToMouse > Math.PI) angleDiffToMouse -= Math.PI * 2;
+                while (angleDiffToMouse < -Math.PI) angleDiffToMouse += Math.PI * 2;
+
+                // Very strong attraction toward mouse
+                const alignment = 1 - Math.abs(angleDiffToMouse) / Math.PI; // 1 = toward mouse, 0 = away
+                const proximity = Math.max(0, 1 - mouseDist / 1200); // Large 1200px radius
+                // Massively favor directions toward mouse
+                const mouseBonus = 0.05 + alignment * proximity * 20;
+                score *= mouseBonus;
+            }
 
             if (score > bestScore) {
                 bestScore = score;
@@ -3343,6 +3443,27 @@
     async function initElectricAnimation() {
         if (!electricCanvas) return;
         resizeElectricCanvas();
+
+        // Set up mouse tracking for comet guidance
+        electricCanvas.addEventListener('mousemove', (e) => {
+            const rect = electricCanvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+            mouseActive = true;
+        });
+        electricCanvas.addEventListener('mouseleave', () => {
+            mouseActive = false;
+        });
+        electricCanvas.addEventListener('touchmove', (e) => {
+            const rect = electricCanvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            mouseX = touch.clientX - rect.left;
+            mouseY = touch.clientY - rect.top;
+            mouseActive = true;
+        });
+        electricCanvas.addEventListener('touchend', () => {
+            mouseActive = false;
+        });
         window.addEventListener('resize', () => {
             resizeElectricCanvas();
             // Debounce: only recreate map after resize stops
