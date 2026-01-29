@@ -2863,7 +2863,7 @@
             this.angle = start.angle;
 
             const cfg = CONFIG.pulses || { speed: 2, size: 1, length: 10, sparkle: 5, hue: 45 };
-            this.speed = (cfg.speed * 0.75) + Math.random() * (cfg.speed * 0.5);
+            this.speed = (cfg.speed * 0.4) + Math.random() * (cfg.speed * 1.2);
             this.trail = [];
             this.maxTrail = Math.floor(cfg.length * 0.7) + Math.floor(Math.random() * cfg.length * 0.6);
             // Vary initial life so comets don't all die at once (staggered lifespans)
