@@ -1869,26 +1869,28 @@
         publications: {
             2025: [
                 {
-                    title: "Matrix-producing neutrophils populate and shield the skin.",
-                    authors: "Vicanolo T, Özcan A, Li JL, Huerta-López C, Ballesteros I, Rubio-Ponce A, Dumitru AC, Nicolás-Ávila JÁ, Molina-Moreno M, Reyes-Gutierrez P, Johnston AD, Martone C, Greto E, Quílez-Alvarez A, Calvo E, Bonzon-Kulichenko E, Álvarez-Velez R, Chooi MY, Kwok I, González-Bermúdez B, Malleret B, Espinosa FM, Zhang M, Wang YL, Sun D, Zhen Chong S, El-Armouche A, Kim KK, Udalova IA, Greco V, Garcia R, Vázquez J, Dopazo A, Plaza GR, Alegre-Cebollada J, Uderhardt S, Ng LG, Hidalgo A",
-                    journal: "Nature, 2025",
-                    publisherUrl: "https://doi.org/10.1038/s41586-025-08741-5",
+                    title: "Cellular morphodynamics as quantifiers for functional states of resident tissue macrophages in vivo.",
+                    authors: "Schnitzerlein M, Greto E, Wegner A, Möller A, Aust O, Ben Brahim O, Blumenthal DB, Zaburdaev V, Uderhardt S",
+                    journal: "PLoS computational biology, 2025",
+                    publisherUrl: "https://doi.org/10.1371/journal.pcbi.1011859",
                     depositUrl: "https://paperpile.com/shared/smOcy5Ek3RyygqrS887rq7Q",
                     codeUrl: "",
-                    graphicalAbstract: "images/vicanolo.png",
-                    description: `<p>In this collaborative study, together with the labs of Andres Hidalgo and Laiguan Ng, we uncovered an unexpected structural role for neutrophils in the skin: they do not just arrive to kill microbes, they literally help build and reinforce the barrier itself...</p>
+                    graphicalAbstract: "images/schnitzerlein.png",
+                    description: `
+
+<p>In this PLoS Computational Biology study, we set out to turn the “gut feeling” many of us have when watching macrophages under the microscope (that their shape and behavior encode functional state) into quantitative, human‑interpretable metrics that we can actually measure and compare across conditions.</p>
 <br>
 <h4>What we found...</h4>
 <br>
-<p>We surveyed immune diversity across multiple tissues and picked up a distinct neutrophil population in the skin that is unusually rich in extracellular matrix (ECM)-related proteins and enzymes. In steady-state skin, these matrix-producing neutrophils are already embedded in the tissue where they contribute to ECM composition, stiffen the matrix, and, as a result, strengthen barrier function before any overt inflammation. When we injured the skin, these neutrophils switched into an architectural program: they assembled ECM “rings” encircling the wound, physically walling off the damaged area from foreign molecules and bacteria.</p>
+<p>We used intravital microscopy of peritoneal resident tissue macrophages (RTMs) in mice and built an image analysis pipeline that tracks cells over time and extracts a panel of size and shape features, effectively capturing their morphodynamics as trajectories in a multidimensional “morphospace.” Within this morphospace, steady-state RTMs did not cluster into a single behavior but instead occupied a surprisingly broad range of morphological and dynamic phenotypes, which we interpret as a naïve behavioral landscape of the tissue-resident compartment. When we perturbed the system—by inducing pro- or anti-inflammatory activation or by creating endosomal dysfunction—the cell population shifted in morphospace in a reproducible, state-specific manner, allowing us to distinguish functional states solely from their dynamic morphology.</p>
 <br>
-<h4>Mechanism: TGFbeta-dependent “shielding” program</h4>
+<h4>Concept: Morphodynamics as a readout of functional state</h4>
 <br>
-<p>We traced this structural behavior to TGFbeta signaling in neutrophils: when we disabled the TGFbeta receptor specifically in these cells, the matrix rings failed to form properly around wounds. Loss of this neutrophil TGFbeta pathway did not just change morphology; it made the wounds more permissive to bacterial invasion, directly linking the structural program to antimicrobial protection. Conceptually, this places neutrophils as dual-function cells in the skin: rapid toxic killers, but also on-site matrix engineers that create a physical, ECM-based shield against the outside world.</p>
+<p>Conceptually, we show that RTMs explore a constrained morphodynamic repertoire: under challenge, they do not invent entirely new behaviors but move within or along the boundaries of a pre-existing naïve morphospace, suggesting that functional plasticity is implemented as biased sampling of this repertoire rather than wholesale reprogramming. By quantifying features such as cell area, elongation, branching, and temporal fluctuations, and combining them in a computational pipeline, we can classify macrophage states associated with inflammation or trafficking defects without relying on transcriptional or surface marker data. Importantly, when we looked at aged animals, their RTMs showed a dramatically shifted naïve morphospace, indicating that “baseline” macrophage behavior in old tissues is fundamentally different, and that this difference is visible directly in how cells move and shape-shift in vivo.</p>
 <br>
 <h4>Why this matters clinically...</h4>
 <br>
-<p>Clinically, this suggests that defects in neutrophil-ECM programs or TGFbeta responsiveness could contribute to fragile skin barriers, recurrent infections, or impaired wound healing, even when neutrophil counts appear “normal.” It points to a therapeutic angle where, instead of only boosting antimicrobial killing, we might try to enhance or restore this structural shielding program-for example, by modulating TGFbeta pathways in neutrophils or by mimicking their matrix output in chronic wounds. More broadly, it reframes how we think about innate immunity in barrier organs: some leukocytes may be best understood and eventually targeted as tissue builders that physically armor the host, not merely as transient inflammatory visitors.</p>`,
+<p>Clinically, this work hints at morphodynamic profiling as a functional biomarker of tissue health and immune aging: instead of (or alongside) bulk transcriptional signatures, we could one day classify patient macrophage states from explanted or minimally invasive tissue imaging using a standardized morphospace reference. The same framework could be used to screen drugs that “rejuvenate” macrophage behavior in aged or chronically inflamed tissues, or to optimize ex vivo tissue culture conditions by asking a simple question: do the RTMs move and shape-shift like they do in their native niche? In the longer term, these quantitative descriptors could be integrated with computational models and AI-based classifiers to support precision immunomonitoring in conditions such as chronic inflammation, fibrosis, or immunotherapy response, where macrophage dysfunction is central but hard to capture with static markers alone.</p>`,
                     media: []
                 }
             ]
