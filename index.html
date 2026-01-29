@@ -601,38 +601,118 @@
            ============================================ */
         .funding-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            align-items: start;
         }
 
-        .funding-card {
+        .funding-category {
             background: rgba(168, 85, 247, 0.05);
             border: 1px solid rgba(168, 85, 247, 0.2);
             border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
+            padding: 1.5rem;
             transition: all 0.3s ease;
         }
 
-        .funding-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.15);
+        .funding-category:hover {
+            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.1);
         }
 
-        .funding-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .funding-category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            user-select: none;
         }
 
-        .funding-name {
+        .funding-category-header::after {
+            content: '';
+            margin-left: auto;
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid var(--accent);
+            border-bottom: 2px solid var(--accent);
+            transform: rotate(45deg);
+            transition: transform 0.3s ease;
+        }
+
+        .funding-category.expanded .funding-category-header::after {
+            transform: rotate(-135deg);
+        }
+
+        .funding-logo {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            background: rgba(168, 85, 247, 0.1);
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+        }
+
+        .funding-logo-placeholder {
+            min-width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(168, 85, 247, 0.1);
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .funding-category-name {
             font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin: 0;
         }
 
-        .funding-program {
-            font-size: 0.9rem;
+        .funding-entries {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin-top 0.3s ease, padding-top 0.3s ease;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .funding-category.expanded .funding-entries {
+            max-height: 500px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(168, 85, 247, 0.15);
+        }
+
+        .funding-entry {
+            padding: 0.5rem 0;
+        }
+
+        .funding-entry-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .funding-entry-link:hover {
+            color: var(--accent-light);
+            text-decoration: underline;
+        }
+
+        .funding-entry span {
+            font-weight: 500;
+        }
+
+        .funding-entry-desc {
+            font-size: 0.85rem;
             color: var(--text-muted);
+            margin: 0.25rem 0 0 0;
         }
 
         /* ============================================
@@ -994,9 +1074,6 @@
             border-top: 1px solid rgba(168, 85, 247, 0.2);
         }
 
-        .funding-card.has-link {
-            cursor: pointer;
-        }
 
         /* ============================================
            NEWS SECTION
@@ -1844,12 +1921,37 @@
 
         // ========================================
         // FUNDING SOURCES
-        // Add new funders by adding objects to this array
+        // Categories: dfg, erc, uker, industry
         // ========================================
-        funders: [
-            { name: "ERC", program: "Starting Grant", icon: "EU", url: "" },
-            { name: "University", program: "Core Funding", icon: "UNI", url: "" }
-        ],
+        funders: {
+            dfg: {
+                name: "DFG",
+                logo: "images/dfg.png",
+                entries: [{ program: "upcoming.... CRC1755 CASCAID", website: "https://www.fau.eu/2025/11/news/research/fau-mit-drei-sonderforschungsbereichen-erfolgreich/", description: "Cellular and systems control of autoimmune disease" },
+                    { program: "FOR5775 MagNet", website: "https://www.limes-institut-bonn.de/en/research/research-departments/unit-1/mass-lab/news/articles/news/die-choreographen-der-gewebe-entwicklung-und-funktion-im-fokus/", description: "Macrophage Niche Network Dynamics - Defining macrophages as choreographers of tissue development and function" },
+                    { program: "CRU5024 GB.com", website: "https://www.kfo5024.med.fau.de", description: "Immune checkpoints of gut-brain communication in inflammatory and neurodegenerative diseases
+" },
+                    { program: "TRR369 DIONE", website: "https://www.trr369-dione.com", description: "Degeneration of bone due to inflammation" },
+                    { program: "TRR374 RENPRO", website: "https://www.uni-regensburg.de/biologie-vorklinische-medizin/forschen/verbundprojekte/trr-374/ueber-den-trr374-renpro", description: "Tubular system and interstitium of the kidney: (Patho-)physiology and crosstalk" },
+                    { program: "FOR2886 PANDORA", website: "https://www.pandora.for2886.forschung.fau.de", description: "Pathways triggering autoimmunity and defining onset of early Reumatoid Arthritis" },
+                    { program: "DFG Heisenberg professorship", website: "https://gepris.dfg.de/gepris/projekt/448121430?language=en", description: "Assessing tissue-protective functions of macrophages through integrative and functional tissue-level biology." }]
+            },
+            erc: {
+                name: "ERC",
+                logo: "images/erc.png",
+                entries: [{ program: "ERC StG NEXUS", website: "https://www.medizin3.uk-erlangen.de/en/research/research-main-focus/research-group-prof-dr-s-uderhardt/", description: "Network Synergies in stromal tissue homeostasis and prevention of inflammatory disease" }]
+            },
+            uker: {
+                name: "UK Erlangen",
+                logo: "images/uker.png",
+                entries: []
+            },
+            industry: {
+                name: "Industry",
+                logo: "",
+                entries: []
+            }
+        },
 
         // ========================================
         // PUBLICATION STATISTICS
@@ -2278,21 +2380,52 @@
     // Render Funding Section
     function renderFunding() {
         const fundingGrid = document.getElementById('fundingGrid');
-        fundingGrid.innerHTML = CONFIG.funders.map((funder, i) => {
-            const hasUrl = funder.url && funder.url.trim();
-            const wrapperStart = hasUrl ? `<a href="${funder.url}" target="_blank" rel="noopener" style="text-decoration: none; color: inherit;">` : '';
-            const wrapperEnd = hasUrl ? '</a>' : '';
-            const linkClass = hasUrl ? 'has-link' : '';
+        const categories = Object.entries(CONFIG.funders).filter(([key, cat]) => {
+            return Array.isArray(cat.entries) && cat.entries.length > 0 && cat.entries.some(e => e.program);
+        });
+
+        fundingGrid.innerHTML = categories.map(([key, category], i) => {
+            const logoHtml = category.logo
+                ? `<img src="${category.logo}" alt="${category.name}" class="funding-logo">`
+                : `<div class="funding-logo-placeholder">${category.name}</div>`;
+
+            const entriesHtml = category.entries.map(entry => {
+                const hasUrl = entry.website && entry.website.trim();
+                const programLink = hasUrl
+                    ? `<a href="${entry.website}" target="_blank" rel="noopener" class="funding-entry-link">${entry.program}</a>`
+                    : `<span>${entry.program}</span>`;
+                const descHtml = entry.description ? `<p class="funding-entry-desc">${entry.description}</p>` : '';
+                return `<div class="funding-entry">${programLink}${descHtml}</div>`;
+            }).join('');
+
             return `
-                ${wrapperStart}
-                <div class="funding-card ${linkClass} reveal delay-${(i % 4) + 1}">
-                    <div class="funding-icon">${funder.icon}</div>
-                    <h3 class="funding-name">${funder.name}</h3>
-                    <p class="funding-program">${funder.program}</p>
+                <div class="funding-category reveal delay-${(i % 4) + 1}" data-category="${key}">
+                    <div class="funding-category-header">
+                        ${logoHtml}
+                        <h3 class="funding-category-name">${category.name}</h3>
+                    </div>
+                    <div class="funding-entries">${entriesHtml}</div>
                 </div>
-                ${wrapperEnd}
             `;
         }).join('');
+
+        // Add click handlers for accordion (only one open at a time)
+        fundingGrid.querySelectorAll('.funding-category-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const category = header.parentElement;
+                const isExpanded = category.classList.contains('expanded');
+
+                // Close all other categories
+                fundingGrid.querySelectorAll('.funding-category').forEach(cat => {
+                    cat.classList.remove('expanded');
+                });
+
+                // Toggle clicked category (open if was closed)
+                if (!isExpanded) {
+                    category.classList.add('expanded');
+                }
+            });
+        });
     }
 
     // Highlight author name
