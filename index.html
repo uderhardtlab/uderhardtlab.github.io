@@ -1734,7 +1734,7 @@
         hero: {
             label: "Integrative Tissue Immunology",
             title: "UDERHARDT LAB",
-            subtitle: "Med III ｜ University Hospital Erlangen ｜ Germany",
+            subtitle: "Med III | University Hospital Erlangen | Germany",
             // Styling
             labelSize: 1.1,         // rem (0.5-1.5)
             labelColor: "#a855f7",  // hex color
@@ -1763,15 +1763,15 @@
         // ELECTRIC PULSE ANIMATION
         // ========================================
         pulses: {
-            count: 3,          // Number of active pulses (1-30)
-            speed: 1.5,         // Movement speed (0.5-5)
-            size: 3.9999999999999996,          // Pulse thickness multiplier (0.5-10)
-            length: 4114,        // Trail length in points (4-5000)
-            sparkle: 2,         // Sparkle intensity (1-10)
-            hue: 268,            // Color hue (0-360)
-            saturation: 10,    // Color saturation (0-100%)
-            lifetime: 185,       // Comet lifetime in seconds (5-300)
-            sparkleFade: 0.001  // Sparkle fade rate
+            count: 1,
+            speed: 1.5,
+            size: 4.0,
+            length: 5000,
+            sparkle: 2,
+            hue: 360,
+            saturation: 27,
+            lifetime: 300,
+            sparkleFade: 0.001
         },
 
         // ========================================
@@ -1804,19 +1804,19 @@
             // Add/remove/edit research areas here
             areas: [
                 {
-                    icon: "🔬",
+                    icon: "",
                     title: "3D Cell Segmentation",
                     text: "We develop deep learning approaches to accurately segment complex cellular structures in volumetric microscopy data, handling challenging cases like densely packed tissues and irregular morphologies.",
                     detail: "We develop deep learning approaches to accurately segment complex cellular structures in volumetric microscopy data, handling challenging cases like densely packed tissues and irregular morphologies.<br>We develop deep learning approaches to accurately segment complex cellular structures in volumetric microscopy data, handling challenging cases like densely packed tissues and irregular morphologies.<br>We develop deep learning approaches to accurately segment complex cellular structures in volumetric microscopy data, handling challenging cases like densely packed tissues and irregular morphologies."
                 },
                 {
-                    icon: "📊",
+                    icon: "",
                     title: "Morphological Analysis",
                     text: "Our MORPHISTO platform quantifies cell shape, size, and spatial relationships, enabling researchers to understand how cellular form relates to function across development and disease.",
                     detail: ""
                 },
                 {
-                    icon: "🛠️",
+                    icon: "",
                     title: "Open-Source Tools",
                     text: "We believe in making advanced image analysis accessible. All our tools are open-source and designed to integrate seamlessly with existing workflows in napari, Fiji, and Python.",
                     detail: ""
@@ -1847,8 +1847,8 @@
         // Add new funders by adding objects to this array
         // ========================================
         funders: [
-            { name: "ERC", program: "Starting Grant", icon: "🇪🇺", url: "" },
-            { name: "University", program: "Core Funding", icon: "🏛️", url: "" }
+            { name: "ERC", program: "Starting Grant", icon: "EU", url: "" },
+            { name: "University", program: "Core Funding", icon: "UNI", url: "" }
         ],
 
         // ========================================
@@ -1876,19 +1876,19 @@
                     depositUrl: "https://paperpile.com/shared/smOcy5Ek3RyygqrS887rq7Q",
                     codeUrl: "",
                     graphicalAbstract: "images/vicanolo.png",
-                    description: `<p>In this collaborative study, together with the labs of Andres Hidalgo and Laiguan Ng, we uncovered an unexpected structural role for neutrophils in the skin: they do not just arrive to kill microbes, they literally help build and reinforce the barrier itself…</p>
+                    description: `<p>In this collaborative study, together with the labs of Andres Hidalgo and Laiguan Ng, we uncovered an unexpected structural role for neutrophils in the skin: they do not just arrive to kill microbes, they literally help build and reinforce the barrier itself...</p>
 <br>
-<h4>What we found…</h4>
+<h4>What we found...</h4>
 <br>
-<p>We surveyed immune diversity across multiple tissues and picked up a distinct neutrophil population in the skin that is unusually rich in extracellular matrix (ECM)–related proteins and enzymes. In steady-state skin, these matrix-producing neutrophils are already embedded in the tissue where they contribute to ECM composition, stiffen the matrix, and, as a result, strengthen barrier function before any overt inflammation. When we injured the skin, these neutrophils switched into an architectural program: they assembled ECM “rings” encircling the wound, physically walling off the damaged area from foreign molecules and bacteria.</p>
+<p>We surveyed immune diversity across multiple tissues and picked up a distinct neutrophil population in the skin that is unusually rich in extracellular matrix (ECM)-related proteins and enzymes. In steady-state skin, these matrix-producing neutrophils are already embedded in the tissue where they contribute to ECM composition, stiffen the matrix, and, as a result, strengthen barrier function before any overt inflammation. When we injured the skin, these neutrophils switched into an architectural program: they assembled ECM “rings” encircling the wound, physically walling off the damaged area from foreign molecules and bacteria.</p>
 <br>
-<h4>Mechanism: TGFβ-dependent “shielding” program</h4>
+<h4>Mechanism: TGFbeta-dependent “shielding” program</h4>
 <br>
-<p>We traced this structural behavior to TGFβ signaling in neutrophils: when we disabled the TGFβ receptor specifically in these cells, the matrix rings failed to form properly around wounds. Loss of this neutrophil TGFβ pathway did not just change morphology; it made the wounds more permissive to bacterial invasion, directly linking the structural program to antimicrobial protection. Conceptually, this places neutrophils as dual-function cells in the skin: rapid toxic killers, but also on-site matrix engineers that create a physical, ECM-based shield against the outside world.</p>
+<p>We traced this structural behavior to TGFbeta signaling in neutrophils: when we disabled the TGFbeta receptor specifically in these cells, the matrix rings failed to form properly around wounds. Loss of this neutrophil TGFbeta pathway did not just change morphology; it made the wounds more permissive to bacterial invasion, directly linking the structural program to antimicrobial protection. Conceptually, this places neutrophils as dual-function cells in the skin: rapid toxic killers, but also on-site matrix engineers that create a physical, ECM-based shield against the outside world.</p>
 <br>
-<h4>Why this matters clinically…</h4>
+<h4>Why this matters clinically...</h4>
 <br>
-<p>Clinically, this suggests that defects in neutrophil–ECM programs or TGFβ responsiveness could contribute to fragile skin barriers, recurrent infections, or impaired wound healing, even when neutrophil counts appear “normal.” It points to a therapeutic angle where, instead of only boosting antimicrobial killing, we might try to enhance or restore this structural shielding program—for example, by modulating TGFβ pathways in neutrophils or by mimicking their matrix output in chronic wounds. More broadly, it reframes how we think about innate immunity in barrier organs: some leukocytes may be best understood and eventually targeted as tissue builders that physically armor the host, not merely as transient inflammatory visitors.</p>`,
+<p>Clinically, this suggests that defects in neutrophil-ECM programs or TGFbeta responsiveness could contribute to fragile skin barriers, recurrent infections, or impaired wound healing, even when neutrophil counts appear “normal.” It points to a therapeutic angle where, instead of only boosting antimicrobial killing, we might try to enhance or restore this structural shielding program-for example, by modulating TGFbeta pathways in neutrophils or by mimicking their matrix output in chronic wounds. More broadly, it reframes how we think about innate immunity in barrier organs: some leukocytes may be best understood and eventually targeted as tissue builders that physically armor the host, not merely as transient inflammatory visitors.</p>`,
                     media: []
                 }
             ]
@@ -2638,8 +2638,15 @@
 
     function resizeElectricCanvas() {
         if (!electricCanvas) return;
-        electricWidth = electricCanvas.width = window.innerWidth;
-        electricHeight = electricCanvas.height = window.innerHeight;
+        // Use hero section dimensions instead of window to match background-size: cover
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            electricWidth = electricCanvas.width = hero.offsetWidth;
+            electricHeight = electricCanvas.height = hero.offsetHeight;
+        } else {
+            electricWidth = electricCanvas.width = window.innerWidth;
+            electricHeight = electricCanvas.height = window.innerHeight;
+        }
         updateCoverMapping();
     }
 
@@ -2689,10 +2696,10 @@
                         }
                     }
 
-                    console.log('✅ Brightness map created:', mapWidth, 'x', mapHeight, '| Range:', minB.toFixed(2), '-', maxB.toFixed(2));
+                    console.log('Brightness map created:', mapWidth, 'x', mapHeight, '| Range:', minB.toFixed(2), '-', maxB.toFixed(2));
                     resolve(true);
                 } catch (e) {
-                    console.warn('⚠️ CORS blocked image reading. To fix: run a local server (python3 -m http.server)');
+                    console.warn('CORS blocked image reading. To fix: run a local server (python3 -m http.server)');
                     console.log('Falling back to random paths');
                     resolve(false);
                 }
@@ -2700,7 +2707,7 @@
 
             img.onload = processImage;
             img.onerror = () => {
-                console.log('❌ Image load failed, using random paths');
+                console.log('Image load failed, using random paths');
                 resolve(false);
             };
 
