@@ -2105,6 +2105,29 @@
 <br>
 <p>Clinically, we argue that “reversible vs irreversible pulpitis” is best understood as a failure or success of timely resolution in a closed space, determined by the balance between pro‑inflammatory PRR signaling and pro‑resolving/macrophage‑reprogramming pathways rather than simple symptom labels. This framework supports pushing vital pulp therapy further: if we can modulate odontoblast and fibroblast PRR responsiveness, tune complement and lipid mediator profiles, or bias macrophages and DPSCs toward pro‑resolving, regenerative states, we may preserve pulp vitality in cases that currently go straight to full root canal treatment. It also opens the door to more mechanistically rational adjuncts (local pro‑resolving mediators, inflammasome or TLR modulators, neuroimmune-targeted analgesics) layered on top of good caries control and minimally invasive operative dentistry.</p>`,
                     media: []
+                },
+                {
+                    title: "Pressure sensing of lysosomes enables control of TFEB responses in macrophages.",
+                    authors: "Cai R, Scott O, Ye G, Le T, Saran E, Kwon W, Inpanathan S, Sayed BA, Botelho RJ, Saric A, Uderhardt S, Freeman SA",
+                    journal: "Nature cell biology, 2024",
+                    publisherUrl: "https://doi.org/10.1038/s41556-024-01459-y",
+                    depositUrl: "",
+                    codeUrl: "",
+                    graphicalAbstract: "images/cai.png",
+                    description: `<p>In this study, together with our Canadian friends, we dug into a very physical question about lysosomes in macrophages: what actually happens when you keep filling and digesting cargo in endocytic compartments but cannot efficiently move the resulting solutes out into the cytosol? We realized that this is not just a biochemical issue, but a hydrostatic one – pressure literally builds up in the lysosomal lumen and starts to reshape signaling and transcriptional programs in these cells.</p>
+<br>
+<h4>What we found...</h4>
+<br>
+<p>We focused on macrophages that use phagocytosis and macropinocytosis and showed that efficient efflux of lysosomal breakdown products is essential to prevent hydrostatic pressure build-up in the endocytic pathway. When solute export is impaired, lysosomes distend and their normal dynamics (vesiculation, tubulation, fission) are blunted without overt membrane rupture. Under these “swollen” conditions, lysosomes fail to retain luminal Na<sup>+</sup>, and the Na<sup>+</sup> gradient across the lysosomal membrane collapses. This has a knock-on effect: Na<sup>+</sup>-coupled amino acid transporters that normally support mTORC1 activity on lysosomes can no longer operate properly, so mTORC1 activity is inhibited.</p>
+<br>
+<h4>Mechanism: pressure-sensitive Na<sup>+</sup> leak → mTORC1–TFEB/TFE3 axis</h4>
+<br>
+<p>Mechanistically, we propose that lysosomes host pressure-sensitive channels that open under increased intraluminal hydrostatic pressure, allowing Na<sup>+</sup> to leak from the lumen into the cytosol. The resulting loss of the luminal Na<sup>+</sup> gradient uncouples amino acid transport from mTORC1 activation, shifting the cell from anabolism toward a catabolic stress program. In this low-mTORC1 state, TFEB and TFE3 translocate to the nucleus and become active, boosting lysosomal biogenesis and broader lysosomal/autophagy gene expression. Strikingly, TFEB/TFE3 activation in this context also induces secretion of MCP-1/CCL2, directly linking lysosomal pressure sensing to chemokine production. In tissues with high catabolic load, defective solute efflux from endocytic compartments thus becomes a mechanical signal that reprograms macrophages into a TFEB/TFE3-driven, chemokine-secreting state.</p>
+<br>
+<h4>Why this matters clinically...</h4>
+<br>
+<p>Clinically, this work suggests that lysosomes in myeloid cells are not just degradative endpoints, but bona fide mechanosensors that couple intralysosomal pressure to inflammatory output via the mTORC1–TFEB/TFE3 pathway. In catabolically stressed tissues – think lipid-rich plaques, chronically inflamed synovium, tumor microenvironments, or sites with massive debris load – impaired solute efflux could chronically distend lysosomes, driving TFEB/TFE3 activation and MCP‑1/CCL2 release, and thereby amplifying monocyte recruitment. This opens up the idea that targeting lysosomal transporters, pressure-sensitive channels, or the downstream TFEB/TFE3–CCL2 axis might help modulate pathogenic myeloid accumulation without globally suppressing immunity. It also reframes certain lysosomal storage or trafficking disorders: beyond accumulation of undegraded material, there may be ongoing pressure-induced, TFEB‑driven chemokine programs that shape tissue inflammation and remodeling.</p>`,
+                    media: []
                 }
             ]
         },
@@ -3175,6 +3198,32 @@
             // Turn quickly to follow path
             const turnSpeed = direction.onPath ? 0.35 : 0.25;
             this.angle += angleDiff * turnSpeed;
+
+            // Direct mouse steering - only if it keeps comet on path
+            if (mouseActive) {
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 800 && dist > 20) {
+                    const mouseAngle = Math.atan2(dy, dx);
+                    let mouseDiff = mouseAngle - this.angle;
+                    while (mouseDiff > Math.PI) mouseDiff -= Math.PI * 2;
+                    while (mouseDiff < -Math.PI) mouseDiff += Math.PI * 2;
+
+                    // Check if turning toward mouse would stay on path
+                    const testAngle = this.angle + mouseDiff * 0.3;
+                    const testX = this.x + Math.cos(testAngle) * 30;
+                    const testY = this.y + Math.sin(testAngle) * 30;
+                    const pathBrightness = getBrightness(testX, testY);
+
+                    // Only steer toward mouse if path is bright enough
+                    if (pathBrightness > 0.3) {
+                        const strength = (1 - dist / 800) * 0.5;
+                        this.angle += mouseDiff * strength;
+                    }
+                }
+            }
 
             // Minimal random variation
             this.angle += (Math.random() - 0.5) * 0.01;
