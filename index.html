@@ -462,42 +462,131 @@
             margin-bottom: 2rem;
         }
 
-        .research-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
+        .research-cards, .methodology-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        .research-card {
+        .research-area, .methodology-area {
             background: rgba(168, 85, 247, 0.05);
             border: 1px solid rgba(168, 85, 247, 0.2);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 1.5rem;
             transition: all 0.3s ease;
         }
 
-        .research-card:hover {
+        .research-area:hover, .methodology-area:hover {
+            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.1);
+        }
+
+        .research-area-header, .methodology-area-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .research-area-header::after, .methodology-area-header::after {
+            content: '';
+            margin-left: auto;
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid var(--accent);
+            border-bottom: 2px solid var(--accent);
+            transform: rotate(45deg);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .research-area.expanded .research-area-header::after,
+        .methodology-area.expanded .methodology-area-header::after {
+            transform: rotate(-135deg);
+        }
+
+        .research-area-icon, .methodology-area-icon {
+            font-size: 1.5rem;
+            min-width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: rgba(168, 85, 247, 0.1);
-            border-color: rgba(168, 85, 247, 0.4);
-            transform: translateY(-5px);
+            border-radius: 10px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
         }
 
-        .research-card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .research-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
+        .research-area-title, .methodology-area-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0;
             color: var(--node);
+            flex: 1;
         }
 
-        .research-card p {
+        .research-area-content, .methodology-area-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin-top 0.3s ease, padding-top 0.3s ease;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .research-area.expanded .research-area-content,
+        .methodology-area.expanded .methodology-area-content {
+            max-height: 800px;
+            overflow-y: auto;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(168, 85, 247, 0.15);
+        }
+
+        .research-area-text, .methodology-area-text {
             font-size: 0.95rem;
             color: var(--text-dim);
             line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .research-area-detail, .methodology-area-detail {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(168, 85, 247, 0.1);
+        }
+
+        .research-area-media, .methodology-area-media {
+            margin-top: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .research-area-media img, .research-area-media video,
+        .methodology-area-media img, .methodology-area-media video {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .research-area-content::-webkit-scrollbar,
+        .methodology-area-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .research-area-content::-webkit-scrollbar-track,
+        .methodology-area-content::-webkit-scrollbar-track {
+            background: rgba(168, 85, 247, 0.1);
+            border-radius: 3px;
+        }
+
+        .research-area-content::-webkit-scrollbar-thumb,
+        .methodology-area-content::-webkit-scrollbar-thumb {
+            background: rgba(168, 85, 247, 0.4);
+            border-radius: 3px;
         }
 
         /* ============================================
@@ -1661,6 +1750,7 @@
         <ul class="nav-links">
             <li><a href="#news">News</a></li>
             <li><a href="#research">Research</a></li>
+            <li><a href="#methodologySection">Methodology</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="#funding">Funding</a></li>
             <li><a href="#publications">Publications</a></li>
@@ -1677,6 +1767,7 @@
     <div class="mobile-menu" id="mobileMenu">
         <a href="#news">News</a>
         <a href="#research">Research</a>
+        <a href="#methodologySection">Methodology</a>
         <a href="#team">Team</a>
         <a href="#funding">Funding</a>
         <a href="#publications">Publications</a>
@@ -1718,7 +1809,7 @@
     <section class="section" id="research">
         <div class="container">
             <div class="research-grid">
-                <div class="research-image reveal">
+                <div class="research-image reveal" id="researchMedia">
                     <video src="images/research.m4v" autoplay loop muted playsinline></video>
                 </div>
                 <div class="research-content reveal delay-1">
@@ -1727,6 +1818,20 @@
                 </div>
             </div>
             <div class="research-cards" id="researchCards"></div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section class="section section-deep" id="methodologySection">
+        <div class="container">
+            <div class="research-grid">
+                <div class="research-content reveal">
+                    <h2 class="section-title" id="methodologyTitle"></h2>
+                    <p class="research-intro" id="methodologyIntro"></p>
+                </div>
+                <div class="research-image reveal delay-1" id="methodologyMedia"></div>
+            </div>
+            <div class="methodology-cards" id="methodologyCards"></div>
         </div>
     </section>
 
@@ -2167,6 +2272,30 @@
 <br>
 <p>Clinically, this work suggests that lysosomes in myeloid cells are not just degradative endpoints, but bona fide mechanosensors that couple intralysosomal pressure to inflammatory output via the mTORC1–TFEB/TFE3 pathway. In catabolically stressed tissues – think lipid-rich plaques, chronically inflamed synovium, tumor microenvironments, or sites with massive debris load – impaired solute efflux could chronically distend lysosomes, driving TFEB/TFE3 activation and MCP‑1/CCL2 release, and thereby amplifying monocyte recruitment. This opens up the idea that targeting lysosomal transporters, pressure-sensitive channels, or the downstream TFEB/TFE3–CCL2 axis might help modulate pathogenic myeloid accumulation without globally suppressing immunity. It also reframes certain lysosomal storage or trafficking disorders: beyond accumulation of undegraded material, there may be ongoing pressure-induced, TFEB‑driven chemokine programs that shape tissue inflammation and remodeling.</p>`,
                     media: []
+                },
+                {
+                    title: "Dynamic multiplex tissue imaging in inflammation research.",
+                    authors: "Uderhardt S, Neag G, Germain RN",
+                    journal: "Annual review of pathology, 2024",
+                    publisherUrl: "https://doi.org/10.1146/annurev-pathmechdis-070323-124158",
+                    depositUrl: "",
+                    codeUrl: "",
+                    graphicalAbstract: "images/arp-imaging.png",
+                    description: `<p>In this review, we walk through how dynamic multiplex tissue imaging — in particular two-photon microscopy (2PM)– has reshaped the way we look at inflammation in intact organs, where immune cells continuously talk to each other and to parenchymal cells in a highly structured tissue context.</p>
+<br>
+<h4>What we focused on...</h4>
+<br>
+<p>We highlight that inflammation is not just about “who is there” but “how they move, interact, and change over time” within realistic tissue architectures that you simply cannot reconstruct in dissociated or fixed samples. Using selected intravital 2PM studies, we showcase how linking cell tracks, interaction durations, and spatial clustering to molecular cues reveals the in situ function of T cells, myeloid cells, and stromal elements across diverse inflammatory settings. A key point we make is that truly understanding these dynamics often requires imaging deep into opaque organs over extended periods, which only became broadly feasible with the advent of commercially available femtosecond 2P lasers and compatible microscopes.</p>
+<br>
+<h4>Mechanistic and technical insights</h4>
+<br>
+<p>Mechanistically, we walk through how dynamic imaging has uncovered rules of engagement such as chemokine-guided migration, stop-and-go scanning behaviors, and stable versus transient immune–immune or immune–parenchymal contacts that underlie effective pathogen control or tissue damage. On the technical side, we discuss practical aspects that determine data quality and interpretability, including fluorophore selection and multiplexing strategies, laser power and wavelength tuning for depth versus phototoxicity, motion stabilization, and the calibration of temporal and spatial resolution to the biological question. We also call out common pitfalls — from anesthesia and surgical preparation artifacts to misinterpretation of fluorescence spillover or tissue autofluorescence — that can confound conclusions if not rigorously controlled.</p>
+<br>
+<h4>Dynamic multiplex imaging and “omics”</h4>
+<br>
+<p>Throughout the review, we emphasize how multiplex tissue imaging is increasingly about layering dynamic 2PM with additional channels (spectral, functional, or reporter-based) rather than just adding more static markers. This enables us to connect imaging readouts with molecular programs, for example by using reporters of signaling pathway activation, calcium flux, or cytokine production in vivo, and by integrating these with transcriptomic or proteomic data acquired on the same tissues. Conceptually, this turns intravital imaging into a bridge between high-dimensional “omics” and real-time behavior in the native microenvironment.</p>
+<br>`,
+                    media: []
                 }
             ],
             2020: [
@@ -2201,10 +2330,11 @@
                     authors: "Uderhardt S, Martins AJ, Tsang JS, Lämmermann T, Germain RN",
                     journal: "Cell, 2019",
                     publisherUrl: "https://doi.org/10.1016/j.cell.2019.02.028",
-                    depositUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6474841/",
+                    depositUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11554472/",
                     codeUrl: "",
                     graphicalAbstract: "images/cloak.png",
-                    description: `<p>In this work, we asked a simple question: when single cells die all the time in mechanically stressed tissues, why don’t we see constant neutrophil-driven inflammation and collateral damage everywhere? Here, using high‑resolution intravital imaging and multiplex confocal microscopy, we discovered that tissue-resident macrophages act as local “cloakers” of microlesions, physically and functionally shielding tiny foci of necrosis from neutrophil swarming and thereby preserving tissue integrity under steady-state and disease conditions.</p>
+                    description: `
+<p>In this work, we asked a simple question: when single cells die all the time in mechanically stressed tissues, why don’t we see constant neutrophil-driven inflammation and collateral damage everywhere? Here, using high‑resolution intravital imaging and multiplex confocal microscopy, we discovered that tissue-resident macrophages act as local “cloakers” of microlesions, physically and functionally shielding tiny foci of necrosis from neutrophil swarming and thereby preserving tissue integrity under steady-state and disease conditions.</p>
 <br>
 <h4>What we found...</h4>
 <br>
@@ -2384,48 +2514,135 @@
         document.getElementById('researchTitle').textContent = CONFIG.research.title;
         document.getElementById('researchIntro').textContent = CONFIG.research.intro;
 
+        // Update main section media
+        const researchMedia = document.getElementById('researchMedia');
+        if (researchMedia && CONFIG.research.media) {
+            const isVideo = CONFIG.research.media.match(/\.(mp4|m4v|webm|ogg)$/i);
+            if (isVideo) {
+                researchMedia.innerHTML = `<video src="${CONFIG.research.media}" autoplay loop muted playsinline></video>`;
+            } else {
+                researchMedia.innerHTML = `<img src="${CONFIG.research.media}" alt="Research">`;
+            }
+        }
+
         const cardsContainer = document.getElementById('researchCards');
         cardsContainer.innerHTML = CONFIG.research.areas.map((area, i) => {
             const hasDetail = area.detail && area.detail.trim();
-            const clickableClass = hasDetail ? 'clickable' : '';
-            const onClick = hasDetail ? `onclick="openResearchModal(${i})"` : '';
+            const hasMedia = area.media && area.media.trim();
+            const isVideo = hasMedia && area.media.match(/\.(mp4|m4v|webm|ogg)$/i);
+
+            let mediaHtml = '';
+            if (hasMedia) {
+                if (isVideo) {
+                    mediaHtml = `<div class="research-area-media"><video src="${area.media}" controls></video></div>`;
+                } else {
+                    mediaHtml = `<div class="research-area-media"><img src="${area.media}" alt="${area.title}"></div>`;
+                }
+            }
+
             return `
-                <div class="research-card ${clickableClass} reveal delay-${i + 2}" ${onClick}>
-                    <div class="research-card-icon">${area.icon}</div>
-                    <h3>${area.title}</h3>
-                    <p>${area.text}</p>
+                <div class="research-area reveal delay-${(i % 3) + 1}" data-area="${i}">
+                    <div class="research-area-header">
+                        <div class="research-area-icon">${area.icon || '📋'}</div>
+                        <h3 class="research-area-title">${area.title}</h3>
+                    </div>
+                    <div class="research-area-content">
+                        <div class="research-area-text">${area.text}</div>
+                        ${hasDetail ? `<div class="research-area-detail">${area.detail}</div>` : ''}
+                        ${mediaHtml}
+                    </div>
                 </div>
             `;
         }).join('');
+
+        // Add click handlers for accordion
+        cardsContainer.querySelectorAll('.research-area-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const area = header.parentElement;
+                const isExpanded = area.classList.contains('expanded');
+
+                // Close all other areas
+                cardsContainer.querySelectorAll('.research-area').forEach(a => {
+                    a.classList.remove('expanded');
+                });
+
+                // Toggle clicked area
+                if (!isExpanded) {
+                    area.classList.add('expanded');
+                }
+            });
+        });
     }
 
-    // Modal functions
-    function openResearchModal(index) {
-        const area = CONFIG.research.areas[index];
-        document.getElementById('modalIcon').textContent = area.icon;
-        document.getElementById('modalTitle').textContent = area.title;
-        document.getElementById('modalBody').innerHTML = area.detail || area.text;
-        document.getElementById('researchModal').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+    // Render Methodology Section
+    function renderMethodology() {
+        const methodologySection = document.getElementById('methodologySection');
+        if (!methodologySection || !CONFIG.methodology) return;
 
-    function closeModal() {
-        document.getElementById('researchModal').classList.remove('active');
-        document.body.style.overflow = '';
-    }
+        document.getElementById('methodologyTitle').textContent = CONFIG.methodology.title;
+        document.getElementById('methodologyIntro').textContent = CONFIG.methodology.intro;
 
-    // Close modal on overlay click
-    document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('researchModal').addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-overlay')) {
-                closeModal();
+        // Update main section media
+        const methodologyMedia = document.getElementById('methodologyMedia');
+        if (methodologyMedia && CONFIG.methodology.media) {
+            const isVideo = CONFIG.methodology.media.match(/\.(mp4|m4v|webm|ogg)$/i);
+            if (isVideo) {
+                methodologyMedia.innerHTML = `<video src="${CONFIG.methodology.media}" autoplay loop muted playsinline></video>`;
+            } else {
+                methodologyMedia.innerHTML = `<img src="${CONFIG.methodology.media}" alt="Methodology">`;
             }
+        }
+
+        const cardsContainer = document.getElementById('methodologyCards');
+        if (!cardsContainer) return;
+
+        cardsContainer.innerHTML = CONFIG.methodology.areas.map((area, i) => {
+            const hasDetail = area.detail && area.detail.trim();
+            const hasMedia = area.media && area.media.trim();
+            const isVideo = hasMedia && area.media.match(/\.(mp4|m4v|webm|ogg)$/i);
+
+            let mediaHtml = '';
+            if (hasMedia) {
+                if (isVideo) {
+                    mediaHtml = `<div class="methodology-area-media"><video src="${area.media}" controls></video></div>`;
+                } else {
+                    mediaHtml = `<div class="methodology-area-media"><img src="${area.media}" alt="${area.title}"></div>`;
+                }
+            }
+
+            return `
+                <div class="methodology-area reveal delay-${(i % 3) + 1}" data-area="${i}">
+                    <div class="methodology-area-header">
+                        <div class="methodology-area-icon">${area.icon || '🔬'}</div>
+                        <h3 class="methodology-area-title">${area.title}</h3>
+                    </div>
+                    <div class="methodology-area-content">
+                        <div class="methodology-area-text">${area.text}</div>
+                        ${hasDetail ? `<div class="methodology-area-detail">${area.detail}</div>` : ''}
+                        ${mediaHtml}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // Add click handlers for accordion
+        cardsContainer.querySelectorAll('.methodology-area-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const area = header.parentElement;
+                const isExpanded = area.classList.contains('expanded');
+
+                // Close all other areas
+                cardsContainer.querySelectorAll('.methodology-area').forEach(a => {
+                    a.classList.remove('expanded');
+                });
+
+                // Toggle clicked area
+                if (!isExpanded) {
+                    area.classList.add('expanded');
+                }
+            });
         });
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
-    });
+    }
 
     // Generate Cell Avatar SVG
     function generateCellAvatar(type) {
@@ -3633,6 +3850,7 @@
         renderHero();
         renderNews();
         renderResearch();
+        renderMethodology();
         renderTeam();
         renderFunding();
         renderPublications();
