@@ -1,0 +1,15 @@
+# Development files
+CLAUDE_BUILD.md
+ELECTRIC_ANIMATION.md
+website_editor.ipynb
+
+# IDE
+.idea/
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
