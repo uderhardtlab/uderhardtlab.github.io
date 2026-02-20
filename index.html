@@ -1605,15 +1605,49 @@
         }
 
         .news-card.pinned {
-            border-color: rgba(168, 85, 247, 0.5);
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+            border-color: transparent;
+            overflow: visible;
         }
 
-        .news-pin {
+        /* Rotating conic-gradient border tracer */
+        .news-card.pinned::before {
+            content: '';
             position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            font-size: 1rem;
+            inset: -2px;
+            border-radius: 17px;
+            background: conic-gradient(
+                from var(--comet-angle, 0deg),
+                transparent 0%,
+                transparent 70%,
+                rgba(168, 85, 247, 0.15) 78%,
+                rgba(168, 85, 247, 0.5) 88%,
+                white 95%,
+                rgba(168, 85, 247, 0.5) 97%,
+                transparent 100%
+            );
+            animation: comet-trace 4s linear infinite;
+            z-index: -1;
+        }
+
+        /* Inner mask to keep only the border visible */
+        .news-card.pinned::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            background: var(--deep);
+            z-index: -1;
+        }
+
+        @property --comet-angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @keyframes comet-trace {
+            from { --comet-angle: 0deg; }
+            to { --comet-angle: 360deg; }
         }
 
         .news-container {
@@ -2184,7 +2218,6 @@
         <div class="container">
             <div class="section-header reveal">
                 <h2 class="section-title">News</h2>
-                <p class="section-subtitle">Latest updates from the lab</p>
             </div>
             <div class="news-container reveal">
                 <div class="news-grid" id="newsGrid"></div>
@@ -2238,7 +2271,7 @@
     <section class="section section-deep" id="jobs">
         <div class="container">
             <div class="section-header reveal">
-                <h2 class="section-title">Job Openings</h2>
+                <h2 class="section-title">Open Positions</h2>
 
             </div>
             <div class="jobs-grid" id="jobsGrid"></div>
@@ -2507,8 +2540,14 @@
         // RESEARCH SECTION
         // ========================================
         research: {
-            title: `Understanding Inflammation Thresholds at the Tissue Level`,
-            intro: `Our research group is interested in how inflammatory processes arise in tissues and organs and which mechanisms enable them to defend themselves against unwanted, pathological inflammation. To this end, we study the complex cellular and molecular interactions in various inflammatory activated tissues before disease becomes clinically apparent. In order to better understand the pathomechanisms of chronic inflammation in autoimmune and auto-inflammatory diseases such as rheumatoid arthritis, psoriasis or inflammatory bowel diseases, we investigate to what extent and whether tissues can regenerate completely after an inflammatory flare-up or a successful therapy. `,
+            title: `Our research`,
+            intro: `<p style="color: #f5f3ff;"><strong>Inflammation thresholds at the tissue level...</strong></p>
+
+<p>Our lab is interested in how and where inflammatory processes arise in tissues, and which mechanisms enable them to defend themselves against any unwanted, pathological inflammation that could cause more harm than good. So understand how such concept would be implicated in maintenance of health or pathogenesis of diseases such as Rheumatoid Arthritis or Ulcerative Colitis… </p>
+<ul style="padding-left: 2em;">
+<li style="color: #a855f7;"><span style="color:rgba(245, 243, 255, 0.7);">we study the complex cellular and molecular interactions in various inflammatory activated tissue compartment before disease becomes actually clinically visible (e.g., as a swollen joint).</span></li>
+<li style="color: #a855f7;"><span style="color:rgba(245, 243, 255, 0.7);">we investigate to what extent and whether tissues can regenerate completely after an inflammatory flare-up or a successful therapy.</span></li>
+</ul>`,
             media: `images/research2.m4v`,
 
             // Add/remove/edit research areas here
@@ -2557,8 +2596,15 @@
         // Each area can have a media field for an image (.png, .jpg) or video (.m4v, .mp4)
         // ========================================
         methodology: {
-            title: `Methodology`,
-            intro: `Our work is highly interdisciplinary at the interface of immunology, omics-based profiling, tissue-level imaging and computational biology. Our goal is to move from a cell‑centric to a tissue‑centric understanding of inflammatory disease: to identify structural, spatial and network determinants that make specific tissue regions vulnerable—or resilient—to chronic inflammation. To do so, we need specific experimental and analytical tools, some of which we have to come up with ourselves...`,
+            title: `Our Methodology`,
+            intro: `<p style="color: #f5f3ff;"><strong>Watching the watchmen...</strong></p><p>Our work is highly interdisciplinary at the interface of immunology, omics-based profiling, tissue-level imaging and computational biology. Our goal is to move from a cell‑centric to a tissue‑centric understanding of inflammatory disease: to identify structural, spatial and network determinants that make specific tissue regions vulnerable—or resilient—to chronic inflammation.</p> 
+<p>To do so…</p>
+<ul style="padding-left: 2em;">
+<li style="color: #a855f7;"><span style="color:rgba(245, 243, 255, 0.7);">we utilise a wide range of optical microscopes at FAU's imaging facility <a href="https://www.oice.fau.de" target="_blank">OICE (ext)</a> to dive deep into tissues</span></li>
+<li style="color: #a855f7;"><span style="color:rgba(245, 243, 255, 0.7);">we need specific experimental and analytical tools, some of which we have to come up with ourselves...</span></li>
+</ul>
+
+`,
             media: `images/method.m4v`,
 
             areas: [
@@ -2579,7 +2625,10 @@
                 {
                     icon: ``,
                     title: `Computational 3D tissue analysis and spatial modeling `,
-                    text: `To translate images into numbers, we develop and apply AI‑assisted pipelines for image restoration, semantic and instance segmentation, and multiscale “quantitative histocytometry”. This includes reconstruction of tissue organisation as well as extraction of graph‑based metrics of network connectivity to derive spatial “fingerprints” of healthy vs. inflamed tissues.`,
+                    text: `While we use commercial software such as Imaris we heavily rely on custom computational solutions. To translate images into numbers, we develop and apply AI‑assisted pipelines for image restoration, semantic and instance segmentation, and multiscale “quantitative histocytometry”. This includes reconstruction of tissue organisation as well as extraction of graph‑based metrics of network connectivity to derive spatial “fingerprints” of healthy vs. inflamed tissues.
+<ul style="padding-left: 2em;">
+<li style="color: #a855f7;"><span style="color:rgba(245, 243, 255, 0.7);">we utilise a wide range of optical microscopes <a href="https://github.com/orgs/uderhardtlab/repositories" target="_blank">GITHUB (ext)</a></span></li>
+</ul>`,
                     detail: ``,
                     media: `images/computer.m4v`
                 },
@@ -3176,7 +3225,6 @@ We collaborate closely with the respective clinical units to analyze patient bio
 
             return `
                 <div class="news-card ${clickableClass} ${pinnedClass}" ${clickHandler}>
-                    ${item.pinned ? '<span class="news-pin">📌</span>' : ''}
                     ${item.tag ? `<span class="news-tag">${item.tag}</span>` : ''}
                     <div class="news-date">${item.date}</div>
                     <h3 class="news-title">${item.title}</h3>
@@ -3309,7 +3357,7 @@ We collaborate closely with the respective clinical units to analyze patient bio
     // Render Research Section
     function renderResearch() {
         document.getElementById('researchTitle').textContent = CONFIG.research.title;
-        document.getElementById('researchIntro').textContent = CONFIG.research.intro;
+        document.getElementById('researchIntro').innerHTML = CONFIG.research.intro;
 
         // Update main section media
         const researchMedia = document.getElementById('researchMedia');
@@ -3376,7 +3424,7 @@ We collaborate closely with the respective clinical units to analyze patient bio
         if (!methodologySection || !CONFIG.methodology) return;
 
         document.getElementById('methodologyTitle').textContent = CONFIG.methodology.title;
-        document.getElementById('methodologyIntro').textContent = CONFIG.methodology.intro;
+        document.getElementById('methodologyIntro').innerHTML = CONFIG.methodology.intro;
 
         // Update main section media
         const methodologyMedia = document.getElementById('methodologyMedia');
