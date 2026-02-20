@@ -3168,7 +3168,7 @@ We collaborate closely with the respective clinical units to analyze patient bio
             const clickableClass = isClickable ? 'clickable' : '';
             const pinnedClass = item.pinned ? 'pinned' : '';
             const externalLink = item.url && !item.url.startsWith('#') ?
-                `<a href="${item.url}" target="_blank" rel="noopener" class="news-link">Take me there →</a>` : '';
+                `<a href="${item.url}" target="_blank" rel="noopener" class="news-link">Take me there (ext) →</a>` : '';
             const internalLink = isClickable ?
                 `<span class="news-link">View ${item.url.replace('#', '')} →</span>` : '';
 
